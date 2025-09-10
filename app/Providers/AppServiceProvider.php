@@ -21,4 +21,17 @@ class AppServiceProvider extends ServiceProvider
     {
         //
     }
+    protected function redirectTo()
+{
+    $role = Auth::user()->role;
+
+    if ($role === 'admin') {
+        return '/admin/dashboard';
+    } elseif ($role === 'hrd') {
+        return '/hrd/dashboard';
+    }
+
+    return '/home';
+}
+
 }

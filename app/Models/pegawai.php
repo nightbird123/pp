@@ -6,8 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pegawai extends Model
 {
+    protected $table = 'pegawai';
+
     protected $fillable = [
-        'nip', 'nama', 'alamat', 'email', 'telepon', 
+        'nip', 'nama', 'alamat', 'email', 'no_telp', 
         'tanggal_masuk', 'jabatan', 'departemen_id'
     ];
 
@@ -16,4 +18,3 @@ class Pegawai extends Model
         return $this->belongsTo(Departemen::class);
     }
 }
-

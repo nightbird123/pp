@@ -7,7 +7,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="fw-bold mb-0">Data Pegawai</h4>
-                        <a href="{{ route('pegawai.create') }}" class="btn btn-primary">Tambah Pegawai</a>
+                        
                     </div>
                     <p>Berikut daftar pegawai:</p>
 
@@ -24,7 +24,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @forelse($pegawai as $p)
+                                @foreach($pegawai as $p)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>{{ $p->jumlah_pegawai }}</td>
@@ -33,11 +33,11 @@
                                         
                                          
                                     </tr>
-                                @empty
+                                
                                     <tr>
                                         <td colspan="4" class="text-center">Belum ada data pegawai.</td>
                                     </tr>
-                                @endforelse
+                                @endforeach
                             </tbody>
                         </table>
                     </div>

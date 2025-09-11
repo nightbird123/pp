@@ -13,7 +13,7 @@ return new class extends Migration
             $table->string('nip')->unique();
             $table->string('nama');
             $table->string('alamat')->nullable();
-           $table->string('email')->unique()->nullable();
+           $table->string('email')->nullable();
 
             $table->string('no_telp')->nullable();
             $table->date('tanggal_masuk')->nullable();

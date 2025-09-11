@@ -19,6 +19,9 @@
     <link rel="stylesheet" href="{{ asset('vendor/css/demo.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fonts/boxicons.css') }}">
 </head>
+<!-- Bootstrap Bundle with Popper (WAJIB buat dropdown, modal, tooltip) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
 <body>
     <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">

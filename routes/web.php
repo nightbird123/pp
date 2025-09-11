@@ -47,11 +47,19 @@ Route::get('/settings', function () {
 
 
 Route::middleware(['auth'])->group(function () {
+    Route::get('/pegawai', [PegawaiController::class, 'index'])->name('pegawai.index');
     Route::get('/pegawai/create', [PegawaiController::class, 'create'])->name('pegawai.create');
-     Route::post('/pegawai/store', [PegawaiController::class, 'store'])->name('pegawai.store');
+    Route::post('/pegawai/store', [PegawaiController::class, 'store'])->name('pegawai.store');
+    Route::get('/pegawai/{id}', [PegawaiController::class, 'show'])->name('pegawai.show');
+    Route::get('/pegawai/{id}/edit', [PegawaiController::class, 'edit'])->name('pegawai.edit');
+    Route::put('/pegawai/{id}', [PegawaiController::class, 'update'])->name('pegawai.update');
+    Route::delete('/pegawai/{id}', [PegawaiController::class, 'destroy'])->name('pegawai.destroy');
 });
-Route::get('/pegawai', [PegawaiController::class, 'index'])->name('pegawai.index');
-Route::get('/departemen', [DepartemenController::class, 'index'])->name('departemen.index');
+
+
+Route::resource('departemen', DepartemenController::class)
+    ->parameters(['departemen' => 'departemen']);
+
 Route::middleware(['auth', 'role:admin'])->group(function () {
    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
 });

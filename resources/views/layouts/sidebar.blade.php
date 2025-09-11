@@ -1,5 +1,5 @@
 <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
-    <div class="app-brand demo mt-3"> {{-- tambahin margin top biar agak turun --}}
+    <div class="app-brand demo mt-3"> {{-- margin top biar agak turun --}}
         <a href="{{ url('/admin/dashboard') }}" class="app-brand-link">
             <span class="app-brand-logo demo">
                 <svg width="32" height="22" viewBox="0 0 32 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -27,4 +27,38 @@
     </div>
 
     <div class="menu-inner-shadow"></div>
+
+    <ul class="menu-inner py-1">
+        <!-- Dashboard -->
+        <li class="menu-item">
+            <a href="{{ url('/admin/dashboard') }}" class="menu-link">
+                <i class="menu-icon ti ti-home"></i>
+                <div>Dashboard</div>
+            </a>
+        </li>
+
+        <!-- Kelola Pegawai -->
+        <li class="menu-item">
+            <a href="{{ route('pegawai.index') }}" class="menu-link">
+                <i class="menu-icon ti ti-users"></i>
+                <div>Kelola Pegawai</div>
+            </a>
+        </li>
+
+        <!-- Kelola Departemen -->
+        <li class="menu-item">
+            <a href="{{ route('departemen.index') }}" class="menu-link">
+                <i class="menu-icon ti ti-building"></i>
+                <div>Kelola Departemen</div>
+            </a>
+        </li>
+
+        <!-- Laporan Data -->
+        <li class="menu-item">
+            <a href="{{ route('laporan.index') }}" class="menu-link">
+                <i class="menu-icon ti ti-file-text"></i>
+                <div>Laporan Data</div>
+            </a>
+        </li>
+    </ul>
 </aside>

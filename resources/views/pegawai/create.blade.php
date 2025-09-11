@@ -21,6 +21,22 @@
                         <label>Jabatan</label>
                         <input type="text" name="jabatan" class="form-control">
                     </div>
+                     <div class="mb-3">
+                        <label>Departemen</label>
+                        <input type="text" name="departemen" class="form-control">
+                    </div>
+                     <div class="mb-3">
+                        <label>tanggal masuk</label>
+                        <input type="text" name="tanggal_masuk" class="form-control">
+                    </div>
+                     <div class="mb-3">
+                        <label>No Telepon</label>
+                        <input type="text" name="no_telp" class="form-control">
+                    </div>
+                     <div class="mb-3">
+                        <label>Alamat</label>
+                        <input type="text" name="alamat" class="form-control">
+                    </div>
                     <button type="submit" class="btn btn-success">Simpan</button>
                 </form>
 

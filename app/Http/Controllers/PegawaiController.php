@@ -10,9 +10,12 @@ class PegawaiController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+      public function index()
     {
-        //
+        // ambil semua data pegawai dengan relasi departemen
+        $pegawai = Pegawai::with('departemen')->get();
+
+        return view('pegawai.index', compact('pegawai'));
     }
 
     /**

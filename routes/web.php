@@ -7,6 +7,9 @@ use App\Http\Controllers\HRDController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\PegawaiController;
+use App\Http\Controllers\LaporanController;
+use App\Http\Controllers\DepartemenController;
+
 // Default route ke login
 Route::get('/', function () {
     return view('auth.login');
@@ -43,7 +46,12 @@ Route::get('/settings', function () {
 })->name('settings');
 
 
-Route::middleware(['auth', 'role:admin'])->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/pegawai/create', [PegawaiController::class, 'create'])->name('pegawai.create');
      Route::post('/pegawai/store', [PegawaiController::class, 'store'])->name('pegawai.store');
+});
+Route::get('/pegawai', [PegawaiController::class, 'index'])->name('pegawai.index');
+Route::get('/departemen', [DepartemenController::class, 'index'])->name('departemen.index');
+Route::middleware(['auth', 'role:admin'])->group(function () {
+   Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
 });

@@ -15,19 +15,23 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>No</th>
-                                    <th>Nama</th>
-                                    <th>NIP</th>
-                                    <th>Jabatan</th>
+                                    <th>Jumlah Pegawai</th>
+                                    <th>Jumlah Departemen</th>
+                                    <th>Jumlah HRD</th>
+                                   
+                                 
+                                
                                 </tr>
                             </thead>
                             <tbody>
                                 @forelse($pegawai as $p)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $p->nama }}</td>
-                                        <td>{{ $p->nip }}</td>
-                                        <td>{{ $p->jabatan }}</td>
+                                        <td>{{ $p->jumlah_pegawai }}</td>
+                                        <td>{{ $p->jumlah_departemen }}</td>
+                                        <td>{{ $p->jumlah_hrd }}</td>
+                                        
+                                         
                                     </tr>
                                 @empty
                                     <tr>

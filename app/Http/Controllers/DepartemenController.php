@@ -7,10 +7,13 @@ use App\Models\Departemen;
 
 class DepartemenController extends Controller
 {
-public function index() {
-    $departemen = Departemen::with('pegawai')->get();
+public function index()
+{
+    $departemen = Departemen::withCount('pegawai')->get();
     return view('departemen.index', compact('departemen'));
 }
+
+
 
 
 

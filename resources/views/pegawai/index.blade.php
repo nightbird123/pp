@@ -5,7 +5,7 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                   
+
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="fw-bold mb-0">Kelola Data Pegawai</h4>
                         <a href="{{ route('pegawai.create') }}"
@@ -38,7 +38,9 @@
                                             <td>{{ $p->nama }}</td>
                                             <td>{{ $p->jabatan }}</td>
                                             <td>{{ $p->departemen ? $p->departemen->nama_departemen : '-' }}</td>
-                                            <td>{{ $p->tanggal_masuk ? $p->tanggal_masuk->format('d-m-Y') : '-' }}</td>
+                                            <td>{{ $p->tanggal_masuk ? \Carbon\Carbon::parse($p->tanggal_masuk)->format('d-m-Y') : '-' }}
+                                            </td>
+
                                             <td>{{ $p->no_telp ?? '-' }}</td>
                                             <td>{{ $p->alamat ?? '-' }}</td>
 
@@ -60,16 +62,15 @@
 
                                                     <!-- Hapus -->
                                                     <form action="{{ route('pegawai.destroy', $p->id) }}" method="POST"
-                                                        onsubmit="return confirm('Yakin ingin hapus data ini?')"
-                                                        style="display:inline;">
+                                                        class="d-inline form-hapus">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="submit"
-                                                            class="btn btn-sm btn-danger rounded-pill d-flex align-items-center gap-1"
-                                                            title="Hapus">
+                                                            class="btn btn-sm btn-danger rounded-pill d-flex align-items-center gap-1">
                                                             <i class="bx bx-trash"></i> Hapus
                                                         </button>
                                                     </form>
+
                                                 </div>
                                             </td>
 

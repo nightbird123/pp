@@ -9,10 +9,11 @@ class Departemen extends Model
 protected $table = 'departemen'; 
     protected $fillable = ['nama_departemen'];
 
-    public function pegawai()
-    {
-        return $this->hasMany(Pegawai::class);
-    }
+   public function pegawai()
+{
+    return $this->hasMany(Pegawai::class, 'departemen_id');
+}
+
 }
 
 

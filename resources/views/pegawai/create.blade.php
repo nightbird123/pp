@@ -25,7 +25,7 @@
                             <input type="text" name="jabatan" class="form-control">
                         </div>
 
-                      
+
 
                         <div class="mb-3">
                             <label>Tanggal Masuk</label>
@@ -54,6 +54,7 @@
                                 @endforeach
                             </select>
                         </div>
+
 
                         <button type="submit" class="btn btn-success">Simpan</button>
                         <a href="{{ route('pegawai.index') }}" class="btn btn-secondary">Kembali</a>

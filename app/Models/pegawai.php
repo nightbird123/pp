@@ -13,8 +13,9 @@ class Pegawai extends Model
         'tanggal_masuk', 'jabatan', 'departemen_id'
     ];
 
-    public function departemen()
-    {
-        return $this->belongsTo(Departemen::class);
-    }
+   public function departemen()
+{
+    return $this->belongsTo(Departemen::class, 'departemen_id');
+}
+
 }

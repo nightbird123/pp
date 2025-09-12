@@ -16,11 +16,12 @@ class PegawaiController extends Controller
         return view('pegawai.index', compact('pegawai'));
     }
 
-    public function create()
-    {
-        $departemen = Departemen::all();
-        return view('pegawai.create', compact('departemen'));
-    }
+   public function create()
+{
+    $departemen = Departemen::all();
+    return view('pegawai.create', compact('departemen'));
+}
+
 
     /**
      * Store a newly created resource in storage.
@@ -53,32 +54,36 @@ public function store(Request $request)
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
-    {
-        //
-    }
+public function show($id)
+{
+    $pegawai = Pegawai::findOrFail($id);
+    return view('pegawai.show', compact('pegawai'));
+}
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
-    {
-        //
-    }
+   public function edit(Pegawai $pegawai)
+{
+    $departemen = Departemen::all();
+    return view('pegawai.edit', compact('pegawai', 'departemen'));
+}
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+    public function update(Request $request, Pegawai $pegawai)
+{
+    $pegawai->update($request->all());
+    return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil diupdate');
+}
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
-    {
-        //
-    }
+  public function destroy(Pegawai $pegawai)
+{
+    $pegawai->delete();
+    return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil dihapus');
+}
 }

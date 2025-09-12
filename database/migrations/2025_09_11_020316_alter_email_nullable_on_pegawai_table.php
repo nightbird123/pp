@@ -14,11 +14,11 @@ return new class extends Migration
         });
     }
 
-    public function down(): void
-    {
-        Schema::table('pegawai', function (Blueprint $table) {
-            // rollback ke NOT NULL
-            $table->string('email')->nullable(false)->change();
-        });
-    }
+  public function down(): void
+{
+    Schema::table('pegawai', function (Blueprint $table) {
+        $table->string('email')->nullable()->change(); // jangan paksa not null
+    });
+}
+
 };

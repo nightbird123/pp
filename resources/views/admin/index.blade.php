@@ -7,7 +7,6 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
                         <h4 class="fw-bold mb-0">Data Pegawai</h4>
-                        
                     </div>
                     <p>Berikut daftar pegawai:</p>
 
@@ -18,26 +17,19 @@
                                     <th>Jumlah Pegawai</th>
                                     <th>Jumlah Departemen</th>
                                     <th>Jumlah HRD</th>
-                                   
-                                 
-                                
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($pegawai as $p)
+                                <tr>
+                                    <td>{{ $jumlahPegawai }}</td>
+                                    <td>{{ $totalDepartemen }}</td>
+                                    <td>{{ $jumlahHrd }}</td>
+                                </tr>
+                                @if($jumlahPegawai == 0)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $p->jumlah_pegawai }}</td>
-                                        <td>{{ $p->jumlah_departemen }}</td>
-                                        <td>{{ $p->jumlah_hrd }}</td>
-                                        
-                                         
+                                        <td colspan="3" class="text-center">Belum ada data pegawai.</td>
                                     </tr>
-                                
-                                    <tr>
-                                        <td colspan="4" class="text-center">Belum ada data pegawai.</td>
-                                    </tr>
-                                @endforeach
+                                @endif
                             </tbody>
                         </table>
                     </div>
@@ -47,3 +39,4 @@
         </div>
     </div>
 @endsection
+

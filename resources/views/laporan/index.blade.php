@@ -36,14 +36,17 @@
                         <tbody>
                             @foreach($pegawai as $p)
                                 <tr>
-                                    <td>{{ $loop->iteration }}</td> {{-- Loop iteration --}}
+                                    <td>{{ $loop->iteration }}</td>
                                     <td>{{ $p->nama }}</td>
                                     <td>{{ $p->nip }}</td>
                                     <td>{{ $p->jabatan }}</td>
                                     <td>{{ $p->departemen ? $p->departemen->nama_departemen : '-' }}</td>
-                                    <td>{{ $p->tanggal_masuk ? $p->tanggal_masuk->format('d-m-Y') : '-' }}</td>
+                                    <td>
+                                        {{ $p->tanggal_masuk 
+                                            ? \Carbon\Carbon::parse($p->tanggal_masuk)->format('d-m-Y') 
+                                            : '-' }}
+                                    </td>
                                 </tr>
-                            
                                 <tr>
                                     <td colspan="6" class="text-center">Belum ada data pegawai.</td>
                                 </tr>

@@ -26,14 +26,14 @@ Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
 
 // Dashboard Admin
-Route::middleware(['auth', 'role:admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => ['auth','role:admin']], function() {
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
+    Route::resource('hrd', HrdController::class); // Kelola HRD
 });
 
-
 // Dashboard HRD
-Route::middleware(['auth', 'role:hrd'])->group(function () {
-    Route::get('/hrd/dashboard', [HRDController::class, 'index'])->name('hrd.dashboard');
+Route::group(['prefix' => 'hrd', 'as' => 'hrd.', 'middleware' => ['auth','role:hrd']], function() {
+    Route::get('/dashboard', [HRDController::class, 'index'])->name('dashboard');
 });
 
 
@@ -66,3 +66,4 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 });
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+Route::resource('hrd', HRDController::class);

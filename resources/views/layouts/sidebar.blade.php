@@ -38,7 +38,7 @@
                 </a>
             </li>
             <li class="menu-item">
-                <a href="{{ route('hrd.index') }}" class="menu-link">
+                <a href="{{ route('admin.hrd.index') }}" class="menu-link">
                     <i class="menu-icon ti ti-id-badge"></i>
                     <div>Kelola HRD</div>
                 </a>

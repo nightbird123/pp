@@ -18,6 +18,60 @@
     <link rel="stylesheet" href="{{ asset('vendor/css/theme-default.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/css/demo.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/fonts/boxicons.css') }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+<style>
+    .table-responsive {
+    overflow: visible !important;
+    .dropdown-menu {
+    position: absolute !important;
+    transform: none !important;
+    inset: auto !important;
+}
+
+}
+
+/* Tombol glowing */
+/* Tombol aksi dengan nuansa elegan */
+.btn-gradient {
+    background: linear-gradient(135deg, #5a67d8, #434190); /* ungu soft */
+    color: #fff;
+    border: none;
+    transition: all 0.3s ease-in-out;
+    border-radius: 8px;
+    padding: 6px 12px;
+    font-weight: 500;
+}
+.btn-gradient:hover {
+    background: linear-gradient(135deg, #434190, #2b2d42);
+    box-shadow: 0 4px 12px rgba(67, 65, 144, 0.4); /* soft shadow */
+    transform: translateY(-2px); /* sedikit naik */
+}
+
+/* Dropdown lebih halus */
+.dropdown-menu.animate-dropdown {
+    animation: fadeInSoft 0.25s ease forwards;
+    border-radius: 10px;
+    border: none;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15); /* bayangan soft */
+    overflow: hidden;
+}
+@keyframes fadeInSoft {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Item dropdown lebih estetik */
+.dropdown-menu .dropdown-item {
+    padding: 10px 16px;
+    transition: background 0.2s ease, padding-left 0.2s ease;
+}
+.dropdown-menu .dropdown-item:hover {
+    background: rgba(90,103,216,0.15); /* highlight soft */
+    padding-left: 20px; /* sedikit geser kanan */
+}
+
+</style>
+
 </head>
 <!-- Bootstrap Bundle with Popper (WAJIB buat dropdown, modal, tooltip) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -80,6 +134,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 </script>
+@stack('scripts')
 
 </body>
 </html>

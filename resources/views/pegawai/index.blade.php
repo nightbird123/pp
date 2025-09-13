@@ -45,35 +45,42 @@
                                             <td>{{ $p->alamat ?? '-' }}</td>
 
                                             <td class="text-center">
-                                                <div class="btn-group" role="group">
-                                                    <!-- Detail -->
-                                                    <a href="{{ route('pegawai.show', $p->id) }}"
-                                                        class="btn btn-sm btn-outline-secondary rounded-pill d-flex align-items-center gap-1"
-                                                        title="Detail">
-                                                        <i class="bx bx-show"></i> Detail
-                                                    </a>
-
-                                                    <!-- Edit -->
-                                                    <a href="{{ route('pegawai.edit', $p->id) }}"
-                                                        class="btn btn-sm btn-warning rounded-pill text-white d-flex align-items-center gap-1"
-                                                        title="Edit">
-                                                        <i class="bx bx-edit-alt"></i> Edit
-                                                    </a>
-
-                                                    <!-- Hapus -->
-                                                    <form action="{{ route('pegawai.destroy', $p->id) }}" method="POST"
-                                                        class="d-inline form-hapus">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit"
-                                                            class="btn btn-sm btn-danger rounded-pill d-flex align-items-center gap-1">
-                                                            <i class="bx bx-trash"></i> Hapus
-                                                        </button>
-                                                    </form>
-
+                                                <div class="dropdown dropend">
+                                                    <button class="btn btn-sm btn-gradient dropdown-toggle shadow-glow"
+                                                        type="button" id="dropdownMenuButton{{ $p->id }}"
+                                                        data-bs-toggle="dropdown" data-bs-boundary="viewport"
+                                                        {{-- 🔑 ini penting --}} aria-expanded="false">
+                                                        <i class="bi bi-magic"></i> Aksi
+                                                    </button>
+                                                    <ul class="dropdown-menu animate-dropdown"
+                                                        aria-labelledby="dropdownMenuButton{{ $p->id }}">
+                                                        <li>
+                                                            <a class="dropdown-item text-info"
+                                                                href="{{ route('pegawai.show', $p->id) }}">
+                                                                <i class="bi bi-eye"></i> Detail
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <a class="dropdown-item text-warning"
+                                                                href="{{ route('pegawai.edit', $p->id) }}">
+                                                                <i class="bi bi-pencil-square"></i> Edit
+                                                            </a>
+                                                        </li>
+                                                        <li>
+                                                            <form action="{{ route('pegawai.destroy', $p->id) }}"
+                                                                method="POST" class="form-hapus">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="dropdown-item text-danger">
+                                                                    <i class="bi bi-trash"></i> Hapus
+                                                                </button>
+                                                            </form>
+                                                        </li>
+                                                    </ul>
                                                 </div>
-                                            </td>
 
+
+                                            </td>
 
 
                                         </tr>
@@ -90,4 +97,40 @@
             </div>
         </div>
     </div>
+     @push('styles')
+        <style>
+            .table-responsive {
+                overflow: visible !important;
+            }
+        </style>
+    @endpush
 @endsection
+@push('scripts')
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const deleteButtons = document.querySelectorAll('.btn-delete');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    let form = this.closest('form');
+
+                    Swal.fire({
+                        title: 'Yakin hapus?',
+                        text: "Data HRD ini akan dihapus permanen!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+@endpush

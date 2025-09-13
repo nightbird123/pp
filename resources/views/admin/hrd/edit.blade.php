@@ -57,7 +57,7 @@
         </div>
 
         <button type="submit" class="btn btn-success">Update</button>
-        <a href="{{ route('hrd.index') }}" class="btn btn-secondary">Batal</a>
+        <a href="{{ route('admin.hrd.index') }}" class="btn btn-secondary">Batal</a>
     </form>
 </div>
 @endsection

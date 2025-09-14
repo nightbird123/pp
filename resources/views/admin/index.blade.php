@@ -6,9 +6,9 @@
             <div class="card">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
-                        <h4 class="fw-bold mb-0">Data Pegawai</h4>
+                        <h4 class="fw-bold mb-0">Selamat Datang, {{ Auth::user()->name }}</h4>
                     </div>
-                    <p>Berikut daftar pegawai:</p>
+                    <p>Statistik Dinas:</p>
 
                     <div class="table-responsive">
                         <table class="table table-bordered table-striped">

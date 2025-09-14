@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Pegawai;
 use App\Models\Departemen;
 use App\Models\User; // Asumsi HRD tersimpan di table users
+use App\Models\Hrd;
 
 class AdminController extends Controller
 {
@@ -14,7 +15,8 @@ class AdminController extends Controller
         $pegawai = Pegawai::all();
         $jumlahPegawai = $pegawai->count();
         $totalDepartemen = Departemen::count();
-        $jumlahHrd = User::where('role', 'hrd')->count(); // kalau role HRD disimpan di kolom 'role'
+        $jumlahHrd = Hrd::count();
+// kalau role HRD disimpan di kolom 'role'
 
         return view('admin.index', compact('pegawai', 'jumlahPegawai', 'totalDepartemen', 'jumlahHrd'));
     }

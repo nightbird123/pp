@@ -10,13 +10,14 @@ use App\Http\Controllers\PegawaiController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\DepartemenController;
 use App\Http\Controllers\ProfileController;
-
+use App\Http\Controllers\admin\AbsensiController;
+use App\Http\Controllers\admin\CutiController;
 // Default route ke login
 Route::get('/', function () {
     return view('auth.login');
 });
 
-// Auth routes
+// Auth routes  
 Auth::routes();
 
 // Home (opsional)
@@ -32,8 +33,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::resource('/hrd', HrdController::class);
     Route::resource('/departemen', DepartemenController::class);
     Route::resource('/pegawai', PegawaiController::class);
-    Route::get('/laporan', [LaporanController::class, 'index'])->name('laporan.index');
+
+    // resource langsung
+    Route::resource('/cuti', CutiController::class);
+    Route::resource('/absensi', AbsensiController::class);
+
+    // laporan
+    Route::prefix('laporan')->name('laporan.')->group(function () {
+        Route::get('/pegawai', [LaporanController::class, 'pegawai'])->name('pegawai');
+        Route::get('/absensi', [LaporanController::class, 'absensi'])->name('absensi');
+        Route::get('/cuti', [LaporanController::class, 'cuti'])->name('cuti');
+    });
 });
+
+
+
 
 // Dashboard HRD (kalau memang ada role HRD login sendiri)
 Route::group(['prefix' => 'hrd', 'as' => 'hrd.', 'middleware' => ['auth','role:hrd']], function() {

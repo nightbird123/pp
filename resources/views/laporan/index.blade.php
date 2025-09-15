@@ -11,7 +11,7 @@
                 <form method="GET" action="{{ route('laporan.index') }}" class="mb-3 d-flex align-items-center">
                     <select name="departemen_id" class="form-select me-2" style="width: 200px;">
                         <option value="">-- Semua Departemen --</option>
-                        @foreach($departemens as $d)
+                        @foreach($departemen as $d)
                             <option value="{{ $d->id }}" {{ request('departemen_id') == $d->id ? 'selected' : '' }}>
                                 {{ $d->nama_departemen }}
                             </option>

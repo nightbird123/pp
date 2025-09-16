@@ -39,7 +39,7 @@ public function pegawai(Request $request)
             })
             ->get();
 
-        return view('laporan.absensi', compact('absensi', 'departemen'));
+        return view('admin.absensi.index', compact('absensi', 'departemen'));
     }
 
     // Laporan Cuti

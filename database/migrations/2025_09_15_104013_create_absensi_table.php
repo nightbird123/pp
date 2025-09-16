@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('pegawai_id');
             $table->date('tanggal');
-            $table->enum('status', ['Hadir', 'Izin', 'Sakit', 'Cuti', 'Alfa']);
+            $table->enum('status', ['Hadir', 'Izin', 'Sakit', 'Cuti', 'Alpha']);
             $table->string('keterangan')->nullable();
             $table->timestamps();
 

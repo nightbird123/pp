@@ -32,6 +32,11 @@
             </select>
         </div>
 
+        <div class="mb-3">
+            <label for="keterangan" class="form-label">Keterangan</label>
+            <input type="text" name="keterangan" id="keterangan" class="form-control" value="{{ $absensi->keterangan }}" placeholder="Opsional">
+        </div>
+
         <button class="btn btn-success">Update</button>
         <a href="{{ route('admin.absensi.index') }}" class="btn btn-secondary">Batal</a>
     </form>

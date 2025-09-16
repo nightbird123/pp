@@ -6,18 +6,23 @@ use Illuminate\Database\Eloquent\Model;
 
 class Absensi extends Model
 {
-    // biar Laravel gak auto jadi "absensis"
     protected $table = 'absensi';
 
     protected $fillable = [
         'pegawai_id',
         'tanggal',
         'status',
-        'keterangan'
+        'keterangan',
+        'cuti_id', // tambahkan ini
     ];
 
     public function pegawai()
     {
-        return $this->belongsTo(Pegawai::class);
+        return $this->belongsTo(Pegawai::class, 'pegawai_id');
+    }
+
+    public function cuti()
+    {
+        return $this->belongsTo(Cuti::class, 'cuti_id');
     }
 }

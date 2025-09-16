@@ -42,13 +42,19 @@ class AbsensiController extends Controller
         $pegawai = Pegawai::all();
         return view('admin.absensi.edit', compact('absensi', 'pegawai'));
     }
+    public function show($id)
+{
+    $absensi = Absensi::with('pegawai')->findOrFail($id);
+    return view('admin.absensi.show', compact('absensi'));
+}
+
 
     public function update(Request $request, $id)
     {
         $request->validate([
             'pegawai_id' => 'required|exists:pegawai,id',
             'tanggal' => 'required|date',
-            'status' => 'required|in:Hadir,Izin,Sakit,Cuti,Alfa',
+            'status' => 'required|in:Hadir,Izin,Sakit,Cuti,Alpha',
             'keterangan' => 'nullable|string|max:255',
         ]);
 

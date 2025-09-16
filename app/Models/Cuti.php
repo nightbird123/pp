@@ -6,21 +6,24 @@ use Illuminate\Database\Eloquent\Model;
 
 class Cuti extends Model
 {
-    // Kasih tau kalau tabelnya "cuti" bukan "cutis"
     protected $table = 'cuti';
 
-    // Kolom yang boleh diisi
     protected $fillable = [
         'pegawai_id',
         'tanggal_mulai',
         'tanggal_selesai',
-        'keterangan',
-        'status'
+        'jenis_cuti',   // tambahkan ini
+        'status',
+        'keterangan'
     ];
 
-    // Relasi ke Pegawai
-    public function pegawai()
+  public function pegawai()
     {
         return $this->belongsTo(Pegawai::class, 'pegawai_id');
+    }
+
+    public function absensi()
+    {
+        return $this->hasMany(Absensi::class, 'cuti_id');
     }
 }

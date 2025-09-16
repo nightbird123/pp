@@ -1,89 +1,100 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Absensi;
 use App\Models\Pegawai;
-use App\Models\Departemen;
-class PegawaiController extends Controller
+use App\Models\Aktivitas;
+
+class AbsensiController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-   public function index()
+    public function index()
     {
-        $pegawai = Pegawai::with('departemen')->get();
-        return view('pegawai.index', compact('pegawai'));
+        $absensi = Absensi::with('pegawai')->latest()->get();
+        return view('admin.absensi.index', compact('absensi'));
     }
 
-   public function create()
-{
-    $departemen = Departemen::all();
-    return view('pegawai.create', compact('departemen'));
-}
+    public function create()
+    {
+        $pegawai = Pegawai::all();
+        return view('admin.absensi.create', compact('pegawai'));
+    }
 
+    public function store(Request $request)
+    {
+        $request->validate([
+            'pegawai_id' => 'required|exists:pegawai,id',
+            'tanggal'    => 'required|date',
+            'status'     => 'required|in:Hadir,Izin,Sakit,Cuti,Alpha',
+            'keterangan' => 'nullable|string|max:255',
+        ]);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-public function store(Request $request)
-{
-    $request->validate([
-        'nip'           => 'required|string|unique:pegawai,nip',
-        'nama'          => 'required|string|max:255',
-        'jabatan'       => 'nullable|string|max:255',
-        'alamat'        => 'nullable|string',
-        'email'         => 'nullable|email|unique:pegawai,email',
-        'no_telp'       => 'nullable|string|max:20',
-        'tanggal_masuk' => 'nullable|date',
-        'departemen_id' => 'nullable|exists:departemen,id',
-    ]);
+        $absensi = Absensi::create($request->all());
 
-    Pegawai::create($request->only([
-        'nip', 'nama', 'jabatan', 'alamat', 'email',
-        'no_telp', 'tanggal_masuk', 'departemen_id'
-    ]));
+        // Tambahkan log aktivitas
+        Aktivitas::create([
+            'deskripsi' => 'Absensi ditambahkan untuk pegawai ' 
+                . $absensi->pegawai->nama 
+                . ' dengan status ' . $absensi->status,
+        ]);
 
-    return redirect()->route('pegawai.index')
-        ->with('success', 'Pegawai berhasil ditambahkan!');
-}
+        return redirect()->route('admin.absensi.index')
+            ->with('success', 'Absensi berhasil ditambahkan');
+    }
 
+    public function show($id)
+    {
+        $absensi = Absensi::with('pegawai')->findOrFail($id);
+        return view('admin.absensi.show', compact('absensi'));
+    }
 
+    public function edit($id)
+    {
+        $absensi = Absensi::findOrFail($id);
+        $pegawai = Pegawai::all();
+        return view('admin.absensi.edit', compact('absensi', 'pegawai'));
+    }
 
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'pegawai_id' => 'required|exists:pegawai,id',
+            'tanggal'    => 'required|date',
+            'status'     => 'required|in:Hadir,Izin,Sakit,Cuti,Alpha',
+            'keterangan' => 'nullable|string|max:255',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-public function show($id)
-{
-    $pegawai = Pegawai::findOrFail($id);
-    return view('pegawai.show', compact('pegawai'));
-}
+        $absensi = Absensi::findOrFail($id);
+        $absensi->update($request->all());
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-   public function edit(Pegawai $pegawai)
-{
-    $departemen = Departemen::all();
-    return view('pegawai.edit', compact('pegawai', 'departemen'));
-}
+        // Tambahkan log aktivitas update
+        Aktivitas::create([
+            'deskripsi' => 'Absensi pegawai ' 
+                . $absensi->pegawai->nama 
+                . ' diperbarui menjadi status ' . $absensi->status,
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Pegawai $pegawai)
-{
-    $pegawai->update($request->all());
-    return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil diupdate');
-}
+        return redirect()->route('admin.absensi.index')
+            ->with('success', 'Absensi berhasil diperbarui');
+    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-  public function destroy(Pegawai $pegawai)
-{
-    $pegawai->delete();
-    return redirect()->route('pegawai.index')->with('success', 'Pegawai berhasil dihapus');
-}
+    public function destroy($id)
+    {
+        $absensi = Absensi::findOrFail($id);
+
+        // Tambahkan log aktivitas delete
+        Aktivitas::create([
+            'deskripsi' => 'Absensi pegawai ' 
+                . $absensi->pegawai->nama 
+                . ' pada tanggal ' . $absensi->tanggal 
+                . ' telah dihapus',
+        ]);
+
+        $absensi->delete();
+
+        return redirect()->route('admin.absensi.index')
+            ->with('success', 'Absensi berhasil dihapus');
+    }
 }

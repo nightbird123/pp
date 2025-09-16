@@ -5,20 +5,34 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Pegawai;
 use App\Models\Departemen;
-use App\Models\User; // Asumsi HRD tersimpan di table users
 use App\Models\Hrd;
+use App\Models\Aktivitas;
+use App\Models\Absensi;
 
 class AdminController extends Controller
 {
     public function index()
     {
-        $pegawai = Pegawai::all();
-        $jumlahPegawai = $pegawai->count();
+        // Hitung data utama
+        $jumlahPegawai   = Pegawai::count();
         $totalDepartemen = Departemen::count();
-        $jumlahHrd = Hrd::count();
-// kalau role HRD disimpan di kolom 'role'
+        $jumlahHrd       = Hrd::count();
 
-        return view('admin.index', compact('pegawai', 'jumlahPegawai', 'totalDepartemen', 'jumlahHrd'));
+        // Hitung pegawai hadir hari ini
+        $jumlahHadir = Absensi::whereDate('tanggal', today())
+            ->where('status', 'Hadir') // perbaikan disini
+            ->count();
+
+        // Ambil aktivitas terbaru (5 terakhir)
+        $aktivitasTerbaru = Aktivitas::latest()->take(5)->get();
+
+        return view('admin.index', compact(
+            'jumlahPegawai',
+            'totalDepartemen',
+            'jumlahHrd',
+            'jumlahHadir',
+            'aktivitasTerbaru'
+        ));
     }
 
     public function createPegawai()

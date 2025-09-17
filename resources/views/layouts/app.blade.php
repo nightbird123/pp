@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,209 +11,146 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
-    <!-- Vuexy CSS -->
-    <link rel="stylesheet" href="{{ asset('vendor/css/core.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/css/theme-default.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/css/demo.css') }}">
-    <link rel="stylesheet" href="{{ asset('vendor/fonts/boxicons.css') }}">
+    <!-- Vuexy / Core CSS via CDN -->
+    <link rel="stylesheet" href="https://demos.pixinvent.com/vuexy-html-admin-template/assets/vendor/css/core.css">
+    <link rel="stylesheet"
+        href="https://demos.pixinvent.com/vuexy-html-admin-template/assets/vendor/css/theme-default.css">
+    <link rel="stylesheet" href="https://demos.pixinvent.com/vuexy-html-admin-template/assets/vendor/css/demo.css">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <style>
         /* =====================
-           LAYOUT & SIDEBAR
-        ====================== */
+   SIDEBAR ESTETIK BIRU
+===================== */
         .layout-menu {
             position: fixed !important;
             top: 0;
             left: 0;
-            width: 260px !important; 
-            height: 100vh !important; 
+            width: 260px !important;
+            height: 100vh !important;
             overflow-y: auto !important;
-            background-color: #1f2937 !important; /* abu tua */
+            background: linear-gradient(180deg, #2563eb, #1e3a8a);
+            /* biru gradasi */
             color: #f9fafb !important;
             z-index: 1030;
+            box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
+            /* bayangan halus */
         }
 
+        /* Judul Sidebar */
+        .layout-menu h4,
+        .layout-menu .menu-header {
+            color: #ffffff !important;
+            font-weight: 600;
+            letter-spacing: .5px;
+        }
+
+        /* Link Sidebar */
+        .layout-menu .menu-link {
+            color: #e0e7ff !important;
+            /* biru muda */
+            padding: 10px 16px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .layout-menu .menu-link:hover {
+            background-color: rgba(255, 255, 255, 0.15) !important;
+            color: #ffffff !important;
+            transform: translateX(5px);
+            /* efek geser */
+        }
+
+        /* Link Aktif */
+        .layout-menu .menu-item.active>.menu-link {
+            background-color: rgba(255, 255, 255, 0.25) !important;
+            color: #fff !important;
+            font-weight: 600;
+            box-shadow: inset 2px 0 0 #3b82f6;
+            /* garis kiri */
+        }
+
+        /* Layout Page */
         .layout-page {
-            margin-left: 260px !important; /* geser konten biar ga ketiban */
-            background-color: #f3f4f6 !important; /* abu soft */
+            margin-left: 260px !important;
+            background-color: #f3f4f6 !important;
             min-height: 100vh;
         }
 
-        /* =====================
-           NAVBAR
-        ====================== */
-        .layout-navbar,
-        .navbar {
+        /* Navbar */
+        .layout-navbar {
             position: sticky;
             top: 0;
             z-index: 1040;
-            background-color: #e5e7eb !important; /* abu terang */
+            background-color: #f9fafb !important;
             color: #111827 !important;
             border-bottom: 1px solid #d1d5db;
         }
 
-        /* =====================
-           SIDEBAR MENU LINK
-        ====================== */
-        .layout-menu .menu-link {
-            color: #d1d5db !important;
-            padding: 10px 16px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-        }
-        .layout-menu .menu-link:hover {
-            background-color: #374151 !important;
-            color: #ffffff !important;
-        }
-
-        /* =====================
-           KONTEN UTAMA
-        ====================== */
+        /* Konten */
         .content-wrapper {
             padding: 20px;
-        }
-        body,
-        .layout-wrapper {
-            background-color: #f3f4f6 !important;
-            color: #111827 !important;
-        }
-
-        /* =====================
-           CARD & TABLE
-        ====================== */
-        .card,
-        .table {
-            background-color: #ffffff !important;
-            color: #111827 !important;
-            border: 1px solid #e5e7eb !important;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-
-        /* =====================
-           TOMBOL
-        ====================== */
-        .btn-primary {
-            background-color: #3b82f6 !important;
-            border: none !important;
-            border-radius: 8px;
-            font-weight: 500;
-            padding: 6px 14px;
-            transition: all 0.2s ease;
-        }
-        .btn-primary:hover {
-            background-color: #2563eb !important;
-            transform: translateY(-2px);
-            box-shadow: 0 3px 10px rgba(37,99,235,0.3);
-        }
-
-        .btn-gradient {
-            background: linear-gradient(135deg, #5a67d8, #434190);
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            padding: 6px 14px;
-            font-weight: 500;
-            transition: all 0.3s ease-in-out;
-        }
-        .btn-gradient:hover {
-            background: linear-gradient(135deg, #434190, #2b2d42);
-            box-shadow: 0 4px 12px rgba(67,65,144,0.4);
-            transform: translateY(-2px);
-        }
-
-        /* =====================
-           DROPDOWN
-        ====================== */
-        .dropdown-menu.animate-dropdown {
-            animation: fadeInSoft 0.25s ease forwards;
-            border-radius: 10px;
-            border: none;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-            overflow: hidden;
-        }
-        @keyframes fadeInSoft {
-            from { opacity: 0; transform: translateY(8px); }
-            to   { opacity: 1; transform: translateY(0); }
-        }
-        .dropdown-menu .dropdown-item {
-            padding: 10px 16px;
-            transition: background 0.2s ease, padding-left 0.2s ease;
-        }
-        .dropdown-menu .dropdown-item:hover {
-            background: rgba(90,103,216,0.15);
-            padding-left: 20px;
         }
     </style>
 </head>
 
 <body>
-    <!-- Layout wrapper -->
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
 
             {{-- Sidebar --}}
             @include('layouts.sidebar')
 
-            <!-- Layout page -->
             <div class="layout-page">
-
                 {{-- Navbar --}}
                 @include('layouts.navbar')
 
-                <!-- Content wrapper -->
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
                         @yield('content')
                     </div>
-
-                    {{-- Footer --}}
                     @include('layouts.footer')
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Bootstrap Bundle with Popper -->
+    <!-- Bootstrap + Vuexy JS via CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Vuexy JS -->
-    <script src="{{ asset('vendor/js/core.js') }}"></script>
-    <script src="{{ asset('vendor/js/menu.js') }}"></script>
-    <script src="{{ asset('vendor/js/main.js') }}"></script>
+    <script src="https://demos.pixinvent.com/vuexy-html-admin-template/assets/vendor/js/core.js"></script>
+    <script src="https://demos.pixinvent.com/vuexy-html-admin-template/assets/vendor/js/menu.js"></script>
+    <script src="https://demos.pixinvent.com/vuexy-html-admin-template/assets/vendor/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        const forms = document.querySelectorAll('.form-hapus');
-
-        forms.forEach(form => {
-            form.addEventListener('submit', function (e) {
-                e.preventDefault();
-
-                Swal.fire({
-                    title: 'Yakin ingin menghapus?',
-                    text: "Data yang dihapus tidak bisa dikembalikan!",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#6c757d',
-                    confirmButtonText: 'Ya, hapus!',
-                    cancelButtonText: 'Batal'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        form.submit();
-                    }
+        document.addEventListener('DOMContentLoaded', function() {
+            const forms = document.querySelectorAll('.form-hapus');
+            forms.forEach(form => {
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    Swal.fire({
+                        title: 'Yakin ingin menghapus?',
+                        text: "Data yang dihapus tidak bisa dikembalikan!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#6c757d',
+                        confirmButtonText: 'Ya, hapus!',
+                        cancelButtonText: 'Batal'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            form.submit();
+                        }
+                    });
                 });
             });
         });
-    });
     </script>
 
     @stack('scripts')
 </body>
+
 </html>

@@ -12,6 +12,8 @@ use App\Http\Controllers\DepartemenController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\admin\AbsensiController;
 use App\Http\Controllers\admin\CutiController;
+use App\Http\Controllers\SettingController;
+use App\Http\Controllers\AktivitasController;
 // Default route ke login
 Route::get('/', function () {
     return view('auth.login');
@@ -58,8 +60,18 @@ Route::group(['prefix' => 'hrd', 'as' => 'hrd.', 'middleware' => ['auth','role:h
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 
 // Profile & Settings
-Route::get('/profile', fn() => view('profile'))->name('profile.edit');
-Route::get('/settings', fn() => view('settings'))->name('settings');
+Route::middleware(['auth'])->group(function () {
+    // Profile
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+    // Settings
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings');
+    Route::post('/settings/update', [SettingController::class, 'update'])->name('settings.update');
+
+    // Logout otomatis pakai bawaan Laravel Breeze / Jetstream
+    // Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
+});
 
 // Pegawai (opsional, kalau memang bukan di admin prefix)
 Route::middleware(['auth'])->group(function () {
@@ -84,3 +96,9 @@ Route::middleware(['auth', 'role:admin'])->group(function () {
 // Profile CRUD
 Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
 Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+// Reset semua
+Route::delete('/aktivitas/reset', [AktivitasController::class, 'reset'])->name('aktivitas.reset');
+
+// Hapus satu aktivitas
+Route::delete('/aktivitas/{id}', [AktivitasController::class, 'destroy'])->name('aktivitas.destroy');

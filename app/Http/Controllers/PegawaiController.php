@@ -1,100 +1,96 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\Absensi;
 use App\Models\Pegawai;
+use App\Models\Departemen;
 use App\Models\Aktivitas;
 
-class AbsensiController extends Controller
+class PegawaiController extends Controller
 {
     public function index()
     {
-        $absensi = Absensi::with('pegawai')->latest()->get();
-        return view('admin.absensi.index', compact('absensi'));
+        $pegawai = Pegawai::with('departemen')->latest()->get();
+        return view('pegawai.index', compact('pegawai'));
     }
 
     public function create()
     {
-        $pegawai = Pegawai::all();
-        return view('admin.absensi.create', compact('pegawai'));
+        $departemen = Departemen::all();
+        return view('pegawai.create', compact('departemen'));
     }
 
-    public function store(Request $request)
+   public function store(Request $request)
+{
+    // Validasi input
+    $validated = $request->validate([
+        'nip'           => 'nullable|string|max:50',
+        'nama'          => 'required|string|max:100',
+        'jabatan'       => 'nullable|string|max:100',
+        'tanggal_masuk' => 'nullable|date',
+        'email'         => 'nullable|email|unique:pegawai,email',
+        'no_telp'       => 'nullable|string|max:20',
+        'alamat'        => 'nullable|string|max:255',
+        'departemen_id' => 'required|exists:departemen,id',
+    ]);
+
+    // Simpan data pegawai
+    $pegawai = Pegawai::create($validated);
+
+    // Log aktivitas
+    Aktivitas::create([
+        'deskripsi' => 'Pegawai baru ditambahkan: ' . $pegawai->nama,
+    ]);
+
+    return redirect()->route('pegawai.index')
+        ->with('success', 'Pegawai berhasil ditambahkan');
+}
+
+
+    public function show(Pegawai $pegawai)
     {
-        $request->validate([
-            'pegawai_id' => 'required|exists:pegawai,id',
-            'tanggal'    => 'required|date',
-            'status'     => 'required|in:Hadir,Izin,Sakit,Cuti,Alpha',
-            'keterangan' => 'nullable|string|max:255',
+        $pegawai->load('departemen');
+        return view('pegawai.show', compact('pegawai'));
+    }
+
+    public function edit(Pegawai $pegawai)
+    {
+        $departemen = Departemen::all();
+        return view('pegawai.edit', compact('pegawai', 'departemen'));
+    }
+
+    public function update(Request $request, Pegawai $pegawai)
+    {
+        $validated = $request->validate([
+            'nama'          => 'required|string|max:100',
+            'email'         => 'required|email|unique:pegawai,email,' . $pegawai->id,
+            'telepon'       => 'nullable|string|max:20',
+            'alamat'        => 'nullable|string|max:255',
+            'departemen_id' => 'required|exists:departemen,id',
+            'jabatan'       => 'nullable|string|max:100',
         ]);
 
-        $absensi = Absensi::create($request->all());
+        $pegawai->update($validated);
 
-        // Tambahkan log aktivitas
         Aktivitas::create([
-            'deskripsi' => 'Absensi ditambahkan untuk pegawai ' 
-                . $absensi->pegawai->nama 
-                . ' dengan status ' . $absensi->status,
+            'deskripsi' => 'Data pegawai diperbarui: ' . $pegawai->nama,
         ]);
 
-        return redirect()->route('admin.absensi.index')
-            ->with('success', 'Absensi berhasil ditambahkan');
+        return redirect()->route('pegawai.index')
+            ->with('success', 'Pegawai berhasil diperbarui');
     }
 
-    public function show($id)
+    public function destroy(Pegawai $pegawai)
     {
-        $absensi = Absensi::with('pegawai')->findOrFail($id);
-        return view('admin.absensi.show', compact('absensi'));
-    }
+        $pegawai->delete();
 
-    public function edit($id)
-    {
-        $absensi = Absensi::findOrFail($id);
-        $pegawai = Pegawai::all();
-        return view('admin.absensi.edit', compact('absensi', 'pegawai'));
-    }
-
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'pegawai_id' => 'required|exists:pegawai,id',
-            'tanggal'    => 'required|date',
-            'status'     => 'required|in:Hadir,Izin,Sakit,Cuti,Alpha',
-            'keterangan' => 'nullable|string|max:255',
-        ]);
-
-        $absensi = Absensi::findOrFail($id);
-        $absensi->update($request->all());
-
-        // Tambahkan log aktivitas update
         Aktivitas::create([
-            'deskripsi' => 'Absensi pegawai ' 
-                . $absensi->pegawai->nama 
-                . ' diperbarui menjadi status ' . $absensi->status,
+            'deskripsi' => 'Pegawai dihapus: ' . $pegawai->nama,
         ]);
 
-        return redirect()->route('admin.absensi.index')
-            ->with('success', 'Absensi berhasil diperbarui');
-    }
-
-    public function destroy($id)
-    {
-        $absensi = Absensi::findOrFail($id);
-
-        // Tambahkan log aktivitas delete
-        Aktivitas::create([
-            'deskripsi' => 'Absensi pegawai ' 
-                . $absensi->pegawai->nama 
-                . ' pada tanggal ' . $absensi->tanggal 
-                . ' telah dihapus',
-        ]);
-
-        $absensi->delete();
-
-        return redirect()->route('admin.absensi.index')
-            ->with('success', 'Absensi berhasil dihapus');
+        return redirect()->route('pegawai.index')
+            ->with('success', 'Pegawai berhasil dihapus');
     }
 }

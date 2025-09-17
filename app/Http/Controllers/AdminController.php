@@ -18,10 +18,14 @@ class AdminController extends Controller
         $totalDepartemen = Departemen::count();
         $jumlahHrd       = Hrd::count();
 
-        // Hitung pegawai hadir hari ini
-        $jumlahHadir = Absensi::whereDate('tanggal', today())
-            ->where('status', 'Hadir') // perbaikan disini
-            ->count();
+ $jumlahHadir = Absensi::whereDate('tanggal', today())
+    ->where('status', 'Hadir')
+    ->count();
+
+if ($jumlahHadir == 0) {
+    $jumlahHadir = Absensi::where('status', 'Hadir')->count();
+}
+
 
         // Ambil aktivitas terbaru (5 terakhir)
         $aktivitasTerbaru = Aktivitas::latest()->take(5)->get();

@@ -22,25 +22,30 @@
         </div>
         <!-- /Search -->
 
+        <!-- User Dropdown -->
         <ul class="navbar-nav flex-row align-items-center ms-auto">
-
-            <!-- Language -->
-
-
-            <!-- Style Switcher -->
-      
-
-            <!-- Notification -->
-         
-
-            <!-- User -->
             <li class="nav-item dropdown dropdown-user">
-                <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center" href="javascript:void(0);" data-bs-toggle="dropdown">
-                    <!-- Avatar -->
+                <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center" href="javascript:void(0);"
+                    data-bs-toggle="dropdown">
+
+                    <!-- Avatar Bulat -->
+                    <!-- Avatar Bulat -->
+                    <img src="{{ Auth::check() && Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('img/avatars/1.png') }}"
+                        alt="User Avatar" class="rounded-circle border me-2" width="40" height="40">
+
+
                     <!-- Nama + Role -->
-                    <div class="d-none d-xl-block text-start">
-                        <span class="fw-semibold d-block">{{ Auth::check() ? Auth::user()->name : 'Guest' }}</span>
-                        <small class="text-muted">{{ Auth::check() ? 'Admin' : 'Pengunjung' }}</small>
+                    <div class="d-flex flex-column text-start">
+                        <span class="fw-semibold">
+                            {{ Auth::check() ? Auth::user()->name : 'Guest' }}
+                        </span>
+                        <small class="text-muted">
+                            @if (Auth::check())
+                                {{ Auth::user()->role === 'admin' ? 'Administrator' : 'HRD' }}
+                            @else
+                                Pengunjung
+                            @endif
+                        </small>
                     </div>
                 </a>
 
@@ -56,7 +61,9 @@
                             <i class="ti ti-settings me-2"></i> Pengaturan
                         </a>
                     </li>
-                    <li><div class="dropdown-divider"></div></li>
+                    <li>
+                        <div class="dropdown-divider"></div>
+                    </li>
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
@@ -67,7 +74,8 @@
                     </li>
                 </ul>
             </li>
-            <!--/ User -->
         </ul>
+        <!-- /User Dropdown -->
+
     </div>
 </nav>

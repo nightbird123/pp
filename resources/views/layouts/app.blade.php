@@ -94,6 +94,20 @@
         .content-wrapper {
             padding: 20px;
         }
+        /* Efek animasi dropdown */
+
+        .dropdown-menu {
+            transition: all 0.3s ease;
+        }
+
+        .dropdown-menu.show {
+            transform: translateY(10px);
+        }
+
+        /* Efek animasi dropdown */
+        
+
+
     </style>
 </head>
 

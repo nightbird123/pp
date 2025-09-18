@@ -61,26 +61,29 @@ class PegawaiController extends Controller
         return view('pegawai.edit', compact('pegawai', 'departemen'));
     }
 
-    public function update(Request $request, Pegawai $pegawai)
-    {
-        $validated = $request->validate([
-            'nama'          => 'required|string|max:100',
-            'email'         => 'required|email|unique:pegawai,email,' . $pegawai->id,
-            'telepon'       => 'nullable|string|max:20',
-            'alamat'        => 'nullable|string|max:255',
-            'departemen_id' => 'required|exists:departemen,id',
-            'jabatan'       => 'nullable|string|max:100',
-        ]);
+public function update(Request $request, Pegawai $pegawai)
+{
+    $validated = $request->validate([
+        'nip'           => 'nullable|string|max:50',
+        'nama'          => 'required|string|max:100',
+        'email'         => 'nullable|email|unique:pegawai,email,' . $pegawai->id,
+        'no_telp'       => 'nullable|string|max:20',
+        'alamat'        => 'nullable|string|max:255',
+        'departemen_id' => 'required|exists:departemen,id',
+        'jabatan'       => 'nullable|string|max:100',
+        'tanggal_masuk' => 'nullable|date',
+    ]);
 
-        $pegawai->update($validated);
+    $pegawai->update($validated);
 
-        Aktivitas::create([
-            'deskripsi' => 'Data pegawai diperbarui: ' . $pegawai->nama,
-        ]);
+    Aktivitas::create([
+        'deskripsi' => 'Data pegawai diperbarui: ' . $pegawai->nama,
+    ]);
 
-        return redirect()->route('pegawai.index')
-            ->with('success', 'Pegawai berhasil diperbarui');
-    }
+    return redirect()->route('pegawai.index')
+        ->with('success', 'Pegawai berhasil diperbarui');
+}
+
 
     public function destroy(Pegawai $pegawai)
     {

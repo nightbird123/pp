@@ -16,7 +16,7 @@ use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AktivitasController;
 // Default route ke login
 Route::get('/', function () {
-    return view('auth.login');
+    return view('landing');
 });
 
 // Auth routes  

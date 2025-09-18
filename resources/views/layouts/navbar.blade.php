@@ -30,7 +30,7 @@
 
                     <!-- Avatar Bulat -->
                     <!-- Avatar Bulat -->
-                    <img src="{{ Auth::check() && Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('img/avatars/1.png') }}"
+                    <img src="{{ Auth::check() && Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('img/avatars/6.png') }}"
                         alt="User Avatar" class="rounded-circle border me-2" width="40" height="40">
 
 
@@ -50,15 +50,15 @@
                 </a>
 
                 <!-- Dropdown Menu -->
-                <ul class="dropdown-menu dropdown-menu-end">
+                <ul class="dropdown-menu dropdown-menu-end modern-dropdown shadow-lg border-0 rounded-3">
                     <li>
-                        <a class="dropdown-item" href="{{ route('profile.edit') }}">
-                            <i class="ti ti-user me-2"></i> Ubah Profil
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.edit') }}">
+                            <i class="ti ti-user me-2 text-primary"></i> Ubah Profil
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="{{ route('settings') }}">
-                            <i class="ti ti-settings me-2"></i> Pengaturan
+                        <a class="dropdown-item d-flex align-items-center" href="{{ route('settings') }}">
+                            <i class="ti ti-settings me-2 text-warning"></i> Pengaturan
                         </a>
                     </li>
                     <li>
@@ -67,15 +67,17 @@
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="dropdown-item text-danger">
+                            <button type="submit" class="dropdown-item text-danger d-flex align-items-center">
                                 <i class="ti ti-logout me-2"></i> Logout
                             </button>
                         </form>
                     </li>
                 </ul>
+
             </li>
         </ul>
         <!-- /User Dropdown -->
 
     </div>
 </nav>
+

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\admin;
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -24,11 +24,12 @@ class CutiController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'pegawai_id' => 'required',
-            'tanggal_mulai' => 'required|date',
+            'pegawai_id'      => 'required|exists:pegawai,id',
+            'tanggal_mulai'   => 'required|date',
             'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
-            'jenis_cuti' => 'required',
-            'status' => 'nullable|in:Pending,Disetujui,Ditolak',
+            'jenis_cuti'      => 'required|string|max:255',
+            'status'          => 'nullable|in:Pending,Disetujui,Ditolak',
+            'keterangan'      => 'nullable|string',
         ]);
 
         Cuti::create($request->all());
@@ -45,27 +46,26 @@ class CutiController extends Controller
 
     public function update(Request $request, $id)
     {
-    $request->validate([
-    'pegawai_id' => 'required|exists:pegawai,id',
-    'tanggal_mulai' => 'required|date',
-    'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
-    'jenis_cuti' => 'required|in:Tahunan,Melahirkan,Lainnya',
-    'status' => 'required|in:Pending,Disetujui,Ditolak',
-    'keterangan' => 'nullable|string',
-]);
-
+        $request->validate([
+            'pegawai_id'      => 'required|exists:pegawai,id',
+            'tanggal_mulai'   => 'required|date',
+            'tanggal_selesai' => 'required|date|after_or_equal:tanggal_mulai',
+            'jenis_cuti'      => 'required|string|max:255',
+            'status'          => 'required|in:Pending,Disetujui,Ditolak',
+            'keterangan'      => 'nullable|string',
+        ]);
 
         $cuti = Cuti::findOrFail($id);
         $cuti->update($request->all());
 
         return redirect()->route('admin.cuti.index')->with('success', 'Data cuti berhasil diupdate');
     }
-    public function show($id)
-{
-    $cuti = Cuti::with('pegawai')->findOrFail($id);
-    return view('admin.cuti.show', compact('cuti'));
-}
 
+    public function show($id)
+    {
+        $cuti = Cuti::with('pegawai')->findOrFail($id);
+        return view('admin.cuti.show', compact('cuti'));
+    }
 
     public function destroy($id)
     {

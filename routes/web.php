@@ -14,6 +14,9 @@ use App\Http\Controllers\admin\AbsensiController;
 use App\Http\Controllers\admin\CutiController;
 use App\Http\Controllers\SettingController;
 use App\Http\Controllers\AktivitasController;
+use App\Http\Controllers\Hrd\HrdDashboardController;
+use App\Http\Controllers\Hrd\PegawaiController as HrdPegawaiController;
+use App\Http\Controllers\Hrd\LaporanController as HrdLaporanController;
 // Default route ke login
 Route::get('/', function () {
     return view('landing');
@@ -49,12 +52,22 @@ Route::prefix('admin')->name('admin.')->group(function () {
 });
 
 
-
-
-// Dashboard HRD (kalau memang ada role HRD login sendiri)
+// Dashboard HRD (khusus role HRD)
 Route::group(['prefix' => 'hrd', 'as' => 'hrd.', 'middleware' => ['auth','role:hrd']], function() {
-    Route::get('/dashboard', [HrdController::class, 'index'])->name('dashboard');
+    // Dashboard
+    Route::get('/dashboard', [HrdDashboardController::class, 'index'])->name('dashboard');
+
+    // Kelola Pegawai
+    Route::resource('/pegawai', HrdPegawaiController::class);
+
+    // Laporan HRD
+    Route::prefix('laporan')->name('laporan.')->group(function () {
+        Route::get('/pegawai', [HrdLaporanController::class, 'pegawai'])->name('pegawai');
+        Route::get('/absensi', [HrdLaporanController::class, 'absensi'])->name('absensi');
+        Route::get('/cuti', [HrdLaporanController::class, 'cuti'])->name('cuti');
+    });
 });
+
 
 // Search
 Route::get('/search', [SearchController::class, 'index'])->name('search');

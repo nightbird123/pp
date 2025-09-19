@@ -25,5 +25,9 @@ User::factory()->create([
     'email' => 'hrd@example.com',
     'role' => 'hrd',
 ]);
+ $this->call([
+        AbsensiSeeder::class,
+        CutiSeeder::class,
+    ]);
     }
 }

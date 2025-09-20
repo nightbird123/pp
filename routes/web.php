@@ -76,7 +76,7 @@ Route::get('/search', [SearchController::class, 'index'])->name('search');
 Route::middleware(['auth'])->group(function () {
     // Profile
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::post('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
 
     // Settings
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');

@@ -22,9 +22,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 
     <style>
-        /* =====================
-   SIDEBAR ESTETIK BIRU
-===================== */
         .layout-menu {
             position: fixed !important;
             top: 0;
@@ -94,6 +91,7 @@
         .content-wrapper {
             padding: 20px;
         }
+
         /* Efek animasi dropdown */
 
         .dropdown-menu {
@@ -104,9 +102,49 @@
             transform: translateY(10px);
         }
 
-        /* Efek animasi dropdown */
-        
+        /* Card Dashboard Gradient */
+        .dashboard-card {
+            border: none;
+            border-radius: 1rem;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+            color: white !important;
+            transition: transform .3s ease, box-shadow .3s ease;
+        }
 
+        .dashboard-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Warna per card */
+        .card-pegawai {
+            background: linear-gradient(135deg, #6366f1, #3b82f6) !important;
+        }
+
+        .card-departemen {
+            background: linear-gradient(135deg, #10b981, #059669) !important;
+        }
+
+        .card-hrd {
+            background: linear-gradient(135deg, #06b6d4, #0284c7) !important;
+        }
+
+        .card-hadir {
+            background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+        }
+
+        .card-cuti {
+            background: #6b7280 !important;
+            color: #fff;
+        }
+        .dark-mode {
+    background-color: #121212;
+    color: #f5f5f5;
+}
+.dark-mode .card {
+    background-color: #1e1e1e;
+    color: #f5f5f5;
+}
 
     </style>
 </head>

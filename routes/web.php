@@ -81,9 +81,6 @@ Route::middleware(['auth'])->group(function () {
     // Settings
     Route::get('/settings', [SettingController::class, 'index'])->name('settings');
     Route::post('/settings/update', [SettingController::class, 'update'])->name('settings.update');
-
-    // Logout otomatis pakai bawaan Laravel Breeze / Jetstream
-    // Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
 });
 
 // Pegawai (opsional, kalau memang bukan di admin prefix)

@@ -2,6 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+    
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -20,8 +21,51 @@
     <link rel="stylesheet" href="https://demos.pixinvent.com/vuexy-html-admin-template/assets/vendor/css/demo.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-
+  <!-- Tabler Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
     <style>
+        /* Dark Mode */
+.dark-mode {
+    background-color: #1e1e2f !important;
+    color: #e0e0e0 !important;
+}
+
+.dark-mode .navbar,
+.dark-mode .layout-navbar {
+    background-color: #2c2c3e !important;
+    color: #f5f5f5 !important;
+}
+
+.dark-mode .sidebar,
+.dark-mode .layout-menu {
+    background-color: #252538 !important;
+    color: #ccc !important;
+}
+
+.dark-mode .card {
+    background-color: #2e2e44 !important;
+    color: #e0e0e0 !important;
+}
+
+.dark-mode .dropdown-menu {
+    background-color: #2c2c3e !important;
+    color: #f0f0f0 !important;
+}
+
+.dark-mode .form-control {
+    background-color: #2e2e44 !important;
+    color: #fff !important;
+    border: 1px solid #444 !important;
+}
+
+.dark-mode .form-control::placeholder {
+    color: #aaa !important;
+}
+
+.dark-mode .badge.bg-danger {
+    background-color: #e74c3c !important;
+}
+
         .layout-menu {
             position: fixed !important;
             top: 0;

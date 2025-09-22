@@ -7,21 +7,18 @@ use Illuminate\Http\Request;
 use App\Models\Absensi;
 use App\Models\Pegawai;
 use App\Models\Aktivitas;
+
 class AbsensiController extends Controller
 {
     public function index()
     {
-        // Ambil semua data absensi dengan relasi pegawai
         $absensi = Absensi::with('pegawai')->latest()->get();
-
         return view('admin.absensi.index', compact('absensi'));
     }
 
     public function create()
     {
-        // Ambil semua pegawai untuk form absensi
         $pegawai = Pegawai::all();
-
         return view('admin.absensi.create', compact('pegawai'));
     }
 
@@ -36,19 +33,21 @@ class AbsensiController extends Controller
 
         $absensi = Absensi::create($request->all());
 
-        // Catat ke aktivitas
         Aktivitas::create([
             'deskripsi' => "Absensi ditambahkan untuk pegawai: " . $absensi->pegawai->nama,
         ]);
 
-        return redirect()->route('admin.absensi.index')
-                         ->with('success', 'Absensi berhasil ditambahkan');
+        // Tambah notif ke session
+        $notif = session()->get('notif', []);
+        $notif[] = 'Absensi berhasil ditambahkan';
+        session()->put('notif', $notif);
+
+        return redirect()->route('admin.absensi.index');
     }
 
     public function show($id)
     {
         $absensi = Absensi::with('pegawai')->findOrFail($id);
-
         return view('admin.absensi.show', compact('absensi'));
     }
 
@@ -56,7 +55,6 @@ class AbsensiController extends Controller
     {
         $absensi = Absensi::findOrFail($id);
         $pegawai = Pegawai::all();
-
         return view('admin.absensi.edit', compact('absensi', 'pegawai'));
     }
 
@@ -72,8 +70,12 @@ class AbsensiController extends Controller
         $absensi = Absensi::findOrFail($id);
         $absensi->update($request->all());
 
-        return redirect()->route('admin.absensi.index')
-            ->with('success', 'Absensi berhasil diperbarui');
+        // Tambah notif ke session
+        $notif = session()->get('notif', []);
+        $notif[] = 'Absensi berhasil diperbarui';
+        session()->put('notif', $notif);
+
+        return redirect()->route('admin.absensi.index');
     }
 
     public function destroy($id)
@@ -81,7 +83,11 @@ class AbsensiController extends Controller
         $absensi = Absensi::findOrFail($id);
         $absensi->delete();
 
-        return redirect()->route('admin.absensi.index')
-            ->with('success', 'Absensi berhasil dihapus');
+        // Tambah notif ke session
+        $notif = session()->get('notif', []);
+        $notif[] = 'Absensi berhasil dihapus';
+        session()->put('notif', $notif);
+
+        return redirect()->route('admin.absensi.index');
     }
 }

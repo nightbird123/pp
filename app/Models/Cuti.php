@@ -12,7 +12,7 @@ class Cuti extends Model
         'pegawai_id',
         'tanggal_mulai',
         'tanggal_selesai',
-        'jenis_cuti',   // tambahkan ini
+        'jenis_cuti',   
         'status',
         'keterangan'
     ];

@@ -11,21 +11,27 @@
     <div class="d-flex align-items-center justify-content-between flex-grow-1" id="navbar-collapse">
 
         <!-- Search -->
-        <div class="flex-grow-1 me-3">
-            <form action="{{ route('search') }}" method="GET" class="d-flex align-items-center w-100">
-                <i class="ti ti-search ti-md me-2 text-muted"></i>
-                <input type="text" name="q" class="form-control border-0 shadow-none"
-                    placeholder="Search (Ctrl+/)" aria-label="Search" value="{{ request('q') }}" />
+        <div class="flex-grow-1 d-flex justify-content-center">
+            <form action="{{ route('search') }}" method="GET" class="w-100" style="max-width:600px;">
+                <div class="search-box">
+                    <input type="text" name="q" class="form-control search-input pe-5"
+                        placeholder="Search (Ctrl+/)" value="{{ request('q') }}">
+                    <button type="submit" class="search-btn">
+                        <i class="ti ti-search"></i>
+                    </button>
+                </div>
             </form>
         </div>
 
-        <!-- Right Side (Clock, Theme, Notif, User) -->
-        <ul class="navbar-nav d-flex align-items-center flex-row gap-3 mb-0">
+        <!-- Divider Soft -->
+        <div class="soft-divider d-none d-lg-block"></div>
 
+        <!-- Right Side -->
+        <ul class="navbar-nav d-flex align-items-center flex-row gap-3 mb-0">
 
             <!-- Clock -->
             <li class="nav-item mx-3 d-none d-lg-block d-flex align-items-center">
-                <img src="{{ asset('img/icons/clock.png') }}" alt="Jam" class="me-2" style="height:22px;">
+                <img src="{{ asset('img/icons/clock1') }}" alt="Jam" class="me-2" style="height:45px;">
                 <span id="clock" class="fw-semibold text-muted"></span>
             </li>
 
@@ -36,23 +42,38 @@
                 </a>
             </li>
 
-
-
             <!-- Notification -->
             <li class="nav-item dropdown mx-2">
                 <a class="nav-link p-2 rounded-circle bg-light-subtle position-relative" href="#"
                     data-bs-toggle="dropdown">
                     <img src="{{ asset('img/icons/bell.png') }}" alt="Notif" style="height:22px;">
-                    <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle p-1"
-                        style="font-size: 0.65rem;">3</span>
+
+                    @if(session('notifs') && count(session('notifs')) > 0)
+                        <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle p-1"
+                            style="font-size: 0.65rem;">
+                            {{ count(session('notifs')) }}
+                        </span>
+                    @endif
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end shadow border-0 rounded-3 mt-2">
                     <li>
-                        <h6 class="dropdown-header">Notifikasi</h6>
+                        <h6 class="dropdown-header d-flex justify-content-between align-items-center">
+                            Notifikasi
+                            @if(session('notifs') && count(session('notifs')) > 0)
+                                <form action="{{ route('notif.reset') }}" method="POST" class="d-inline">
+                                    @csrf
+                                    <button type="submit" class="btn btn-sm btn-link text-danger p-0">Reset</button>
+                                </form>
+                            @endif
+                        </h6>
                     </li>
-                    <li><a class="dropdown-item" href="#">Pegawai baru ditambahkan</a></li>
-                    <li><a class="dropdown-item" href="#">Pengajuan cuti menunggu persetujuan</a></li>
-                    <li><a class="dropdown-item" href="#">Profil berhasil diperbarui</a></li>
+                    @if(session('notifs') && count(session('notifs')) > 0)
+                        @foreach(session('notifs') as $notif)
+                            <li><span class="dropdown-item">{{ $notif }}</span></li>
+                        @endforeach
+                    @else
+                        <li><span class="dropdown-item text-muted">Tidak ada notifikasi</span></li>
+                    @endif
                 </ul>
             </li>
 
@@ -60,12 +81,8 @@
             <li class="nav-item dropdown dropdown-user">
                 <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center" href="javascript:void(0);"
                     data-bs-toggle="dropdown">
-
-                    <!-- Avatar Bulat -->
                     <img src="{{ Auth::check() && Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('img/avatars/6.png') }}"
                         alt="User Avatar" class="rounded-circle border me-2" width="40" height="40">
-
-                    <!-- Nama + Role -->
                     <div class="d-none d-lg-flex flex-column text-start">
                         <span class="fw-semibold">{{ Auth::check() ? Auth::user()->name : 'Guest' }}</span>
                         <small class="text-muted">
@@ -77,8 +94,6 @@
                         </small>
                     </div>
                 </a>
-
-                <!-- Dropdown Menu -->
                 <ul class="dropdown-menu dropdown-menu-end modern-dropdown shadow-lg border-0 rounded-3 mt-2">
                     <li>
                         <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.edit') }}">
@@ -90,9 +105,7 @@
                             <i class="ti ti-settings me-2 text-warning"></i> Pengaturan
                         </a>
                     </li>
-                    <li>
-                        <div class="dropdown-divider"></div>
-                    </li>
+                    <li><div class="dropdown-divider"></div></li>
                     <li>
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
@@ -106,15 +119,26 @@
         </ul>
     </div>
 </nav>
+
+<style>
+    .soft-divider {
+        width: 1px;
+        height: 28px;
+        background: rgba(255, 255, 255, 0.15);
+        margin: 0 12px;
+        border-radius: 2px;
+    }
+    body:not(.dark-mode) .soft-divider {
+        background: rgba(0, 0, 0, 0.1);
+    }
+</style>
+
 <script>
     // Clock
     function updateClock() {
         let now = new Date();
         document.getElementById('clock').innerText =
-            now.toLocaleTimeString('id-ID', {
-                hour: '2-digit',
-                minute: '2-digit'
-            });
+            now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
     }
     setInterval(updateClock, 1000);
     updateClock();
@@ -122,8 +146,5 @@
     // Theme Toggle
     document.getElementById('theme-toggle').addEventListener('click', function() {
         document.body.classList.toggle('dark-mode');
-        let icon = document.getElementById('theme-icon');
-        icon.classList.toggle('ti-sun');
-        icon.classList.toggle('ti-moon');
     });
 </script>

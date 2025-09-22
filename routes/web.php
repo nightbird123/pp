@@ -17,6 +17,7 @@ use App\Http\Controllers\AktivitasController;
 use App\Http\Controllers\Hrd\HrdDashboardController;
 use App\Http\Controllers\Hrd\PegawaiController as HrdPegawaiController;
 use App\Http\Controllers\Hrd\LaporanController as HrdLaporanController;
+use App\Http\Controllers\NotifikasiController;
 // Default route ke login
 Route::get('/', function () {
     return view('landing');
@@ -112,3 +113,12 @@ Route::delete('/aktivitas/reset', [AktivitasController::class, 'reset'])->name('
 
 // Hapus satu aktivitas
 Route::delete('/aktivitas/{id}', [AktivitasController::class, 'destroy'])->name('aktivitas.destroy');
+
+// Notifikasi
+Route::post('/notif/add', [NotifikasiController::class, 'add'])->name('notif.add');
+Route::post('/notif/reset', [NotifikasiController::class, 'reset'])->name('notif.reset');
+
+
+
+
+

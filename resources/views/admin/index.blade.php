@@ -65,11 +65,11 @@
     </div>
 @endif
 
-{{-- Grafik & Aktivitas --}}
+{{-- Donut + Aktivitas + Tren Aktivitas --}}
 <div class="row mt-5">
-    {{-- Grafik Distribusi --}}
+    {{-- Donut Chart --}}
     <div class="col-lg-6 mb-4">
-        <div class="card shadow-lg rounded-4">
+        <div class="card shadow-lg rounded-4 h-100">
             <div class="card-body">
                 <h5 class="fw-bold mb-3">Distribusi Pegawai per Departemen</h5>
                 <canvas id="pegawaiChart"></canvas>
@@ -78,8 +78,9 @@
     </div>
 
     {{-- Aktivitas Terbaru + Tren Aktivitas --}}
-    <div class="col-lg-6 mb-4">
-        <div class="card shadow-lg rounded-4">
+    <div class="col-lg-6 mb-4 d-flex flex-column">
+        {{-- Aktivitas Terbaru --}}
+        <div class="card shadow-lg rounded-4 mb-4 flex-fill">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center mb-3">
                     <h5 class="fw-bold">Aktivitas Terbaru</h5>
@@ -91,7 +92,7 @@
                         </button>
                     </form>
                 </div>
-                <ul class="list-group list-group-flush">
+                <ul class="list-group list-group-flush" style="max-height:200px; overflow-y:auto;">
                     @forelse($aktivitasTerbaru as $aktivitas)
                         <li class="list-group-item border-0 ps-0">
                             <div class="d-flex align-items-start">
@@ -111,8 +112,8 @@
             </div>
         </div>
 
-        {{-- Grafik Tren Aktivitas --}}
-        <div class="card shadow-sm border-0 rounded-3 mt-4">
+        {{-- Tren Aktivitas --}}
+        <div class="card shadow-lg rounded-4 flex-fill">
             <div class="card-body">
                 <h5 class="fw-bold mb-3">Tren Aktivitas (7 Hari Terakhir)</h5>
                 <canvas id="aktivitasChart" height="200"></canvas>
@@ -121,11 +122,79 @@
     </div>
 </div>
 
+{{-- Row baru: Cuti Pending + Leaderboard --}}
+<div class="row mt-4 d-flex align-items-stretch">
+    {{-- CUTI PENDING --}}
+    <div class="col-lg-6 mb-4 d-flex">
+        <div class="card shadow-sm border-0 rounded-3 flex-fill h-100">
+            <div class="card-body">
+                <h5 class="fw-bold mb-3">Cuti Pending</h5>
+                <table class="table table-hover align-middle">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Nama Pegawai</th>
+                            <th>Mulai</th>
+                            <th>Selesai</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @forelse($cutiPendingList as $c)
+                            <tr>
+                                <td>{{ $c->pegawai->nama }}</td>
+                                <td>{{ $c->tanggal_mulai }}</td>
+                                <td>{{ $c->tanggal_selesai }}</td>
+                                <td><span class="badge bg-warning text-dark">{{ $c->status }}</span></td>
+                            </tr>
+                        @empty
+                            <tr>
+                                <td colspan="4" class="text-center text-muted">Tidak ada cuti pending.</td>
+                            </tr>
+                        @endforelse
+                    </tbody>
+                </table>
+                <div class="text-end">
+                    <a href="{{ route('admin.cuti.index') }}" class="btn btn-sm btn-primary">Lihat Semua</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{-- LEADERBOARD KEHADIRAN --}}
+    <div class="col-lg-6 mb-4 d-flex">
+        <div class="card shadow-sm border-0 rounded-3 flex-fill h-100">
+            <div class="card-body">
+                <h5 class="fw-bold mb-3">Top 5 Kehadiran Bulan Ini</h5>
+                <ul class="list-group list-group-flush">
+                    @forelse($leaderboard as $rank => $peg)
+                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                            <span>{{ $rank+1 }}. {{ $peg->nama }}</span>
+                            <span class="badge bg-success rounded-pill">{{ $peg->absensi_count }} hadir</span>
+                        </li>
+                    @empty
+                        <li class="list-group-item text-muted">Belum ada data kehadiran.</li>
+                    @endforelse
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+{{-- MOTIVASI HARIAN --}}
+<div class="row mt-3">
+    <div class="col-lg-12">
+        <div class="alert alert-info text-center rounded-pill shadow-sm fw-semibold">
+            <i class="bi bi-lightbulb me-2"></i> 
+            <span class="fw-bold">Motivasi Hari Ini:</span> {{ $motivasi }}
+        </div>
+    </div>
+</div>
+
 
 {{-- Script Chart.js --}}
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-    // Donut Chart (Distribusi Pegawai per Departemen)
+    // Donut Chart
     const ctx1 = document.getElementById('pegawaiChart');
     if (ctx1) {
         new Chart(ctx1, {
@@ -156,7 +225,7 @@
         new Chart(ctx2, {
             type: 'line',
             data: {
-                labels: {!! json_encode(array_keys($trenAktivitas)) !!}, 
+                labels: {!! json_encode(array_keys($trenAktivitas)) !!},
                 datasets: [{
                     label: 'Jumlah Aktivitas',
                     data: {!! json_encode(array_values($trenAktivitas)) !!},

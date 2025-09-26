@@ -37,21 +37,28 @@ public function index()
         ->whereDate('tanggal_selesai', '>=', today())
         ->count();
 
-    // --- Statistik Cuti ---
-    $cutiPending = Cuti::where('status', 'Pending')
-        ->whereDate('tanggal_mulai', '<=', today())
-        ->whereDate('tanggal_selesai', '>=', today())
-        ->count();
+// --- Statistik Cuti ---
+$cutiPending = Cuti::where('status', 'Pending')
+    ->whereDate('tanggal_mulai', '<=', Carbon::today())
+    ->whereDate('tanggal_selesai', '>=', Carbon::today())
+    ->count();
 
-    $cutiDisetujui = Cuti::where('status', 'Disetujui')
-        ->whereDate('tanggal_mulai', '<=', today())
-        ->whereDate('tanggal_selesai', '>=', today())
-        ->count();
+$cutiDisetujui = Cuti::where('status', 'Disetujui')
+    ->whereDate('tanggal_mulai', '<=', Carbon::today())
+    ->whereDate('tanggal_selesai', '>=', Carbon::today())
+    ->count();
 
-    $cutiDitolak = Cuti::where('status', 'Ditolak')
-        ->whereDate('tanggal_mulai', '<=', today())
-        ->whereDate('tanggal_selesai', '>=', today())
-        ->count();
+$cutiDitolak = Cuti::where('status', 'Ditolak')
+    ->whereDate('tanggal_mulai', '<=', Carbon::today())
+    ->whereDate('tanggal_selesai', '>=', Carbon::today())
+    ->count();
+
+    // Daftar cuti pending untuk tabel
+$cutiPendingList = Cuti::with('pegawai')
+    ->where('status', 'Pending')
+    ->orderBy('tanggal_mulai', 'asc')
+    ->take(5)
+    ->get();
 
     $cutiStatusChart = [
         'Pending'   => $cutiPending,
@@ -112,6 +119,25 @@ public function index()
 
     // --- Distribusi Pegawai per Departemen ---
     $distribusi = Departemen::withCount('pegawai')->get();
+// --- Leaderboard Kehadiran Bulan Ini ---
+$leaderboard = Pegawai::withCount(['absensi' => function ($q) {
+        $q->whereMonth('tanggal', Carbon::now()->month)
+          ->whereYear('tanggal', Carbon::now()->year)
+          ->where('status', 'Hadir');
+    }])
+    ->orderByDesc('absensi_count')
+    ->take(5)
+    ->get();
+
+// --- Motivasi Harian ---
+$motivasiList = [
+    "radit mojokerto.",
+    "ilham kegelapan.",
+    "supri kapal.",
+    "smilikitiw.",
+    "sigit ngawi khas magetan."
+];
+$motivasi = $motivasiList[array_rand($motivasiList)];
 
     // --- Kirim ke view ---
     return view('admin.index', compact(
@@ -129,7 +155,10 @@ public function index()
         'trenAktivitas',   
         'absensiChart',
         'cutiChart',
-        'distribusi'
+        'distribusi',
+        'cutiPendingList',
+        'leaderboard',
+        'motivasi'
     ));
 }
 

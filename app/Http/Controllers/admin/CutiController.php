@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cuti;
 use App\Models\Pegawai;
+use App\Models\Aktivitas;
 
 class CutiController extends Controller
 {
@@ -32,7 +33,13 @@ class CutiController extends Controller
             'keterangan'      => 'nullable|string',
         ]);
 
-        Cuti::create($request->all());
+        // simpan cuti
+        $cuti = Cuti::create($request->all());
+
+        // buat aktivitas log
+        Aktivitas::create([
+            'deskripsi' => 'Menambahkan cuti untuk pegawai: ' . $cuti->pegawai->nama,
+        ]);
 
         return redirect()->route('admin.cuti.index')->with('success', 'Data cuti berhasil ditambahkan');
     }
@@ -58,6 +65,10 @@ class CutiController extends Controller
         $cuti = Cuti::findOrFail($id);
         $cuti->update($request->all());
 
+        Aktivitas::create([
+            'deskripsi' => 'Memperbarui cuti untuk pegawai: ' . $cuti->pegawai->nama,
+        ]);
+
         return redirect()->route('admin.cuti.index')->with('success', 'Data cuti berhasil diupdate');
     }
 
@@ -70,7 +81,12 @@ class CutiController extends Controller
     public function destroy($id)
     {
         $cuti = Cuti::findOrFail($id);
+        $pegawaiNama = $cuti->pegawai->nama; // simpan dulu sebelum delete
         $cuti->delete();
+
+        Aktivitas::create([
+            'deskripsi' => 'Menghapus cuti untuk pegawai: ' . $pegawaiNama,
+        ]);
 
         return redirect()->route('admin.cuti.index')->with('success', 'Data cuti berhasil dihapus');
     }

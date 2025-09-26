@@ -97,7 +97,7 @@
             </div>
         </div>
     </div>
-     @push('styles')
+    @push('styles')
         <style>
             .table-responsive {
                 overflow: visible !important;

@@ -26,6 +26,23 @@
 
     <style>
         
+           .btn-gradient {
+        background: linear-gradient(45deg, #17a2b8, #0d6efd); /* gradasi toska → biru */
+        color: #fff;
+        border: none;
+        padding: 5px 12px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.85rem;
+        transition: 0.2s ease-in-out;
+    }
+    .btn-gradient:hover {
+        background: linear-gradient(45deg, #138496, #0b5ed7); /* lebih gelap saat hover */
+        color: #fff;
+    }
+    .btn-gradient:focus {
+        box-shadow: 0 0 0 0.2rem rgba(13,110,253,.4);
+    }
         /* ====================== DARK MODE ====================== */
         body.dark-mode {
             background-color: #121212 !important;

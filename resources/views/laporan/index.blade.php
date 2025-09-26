@@ -5,7 +5,7 @@
     <div class="col-lg-12">
         <div class="card">
             <div class="card-body">
-                <h4 class="fw-bold mb-3">Laporan Data</h4>
+                <h4 class="fw-bold mb-3">Data Pegawai</h4>
 
                 {{-- Filter Departemen --}}
                 <form method="GET" action="{{ route('laporan.index') }}" class="mb-3 d-flex align-items-center">

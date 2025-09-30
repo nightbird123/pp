@@ -37,7 +37,7 @@ class AbsensiController extends Controller
             'deskripsi' => "Absensi ditambahkan untuk pegawai: " . $absensi->pegawai->nama,
         ]);
 
-        // Tambah notif ke session
+        //  notif session
         $notif = session()->get('notif', []);
         $notif[] = 'Absensi berhasil ditambahkan';
         session()->put('notif', $notif);

@@ -29,9 +29,23 @@
         <!-- Right Side -->
         <ul class="navbar-nav d-flex align-items-center flex-row gap-3 mb-0">
 
+            <!-- Greeting -->
+            <li class="nav-item d-none d-lg-flex align-items-center text-muted fw-semibold">
+                <i class="ti ti-sun me-2 text-warning"></i>
+                <span id="greeting"></span>
+            </li>
+
+            <!-- Quick Action -->
+            <li class="nav-item mx-2">
+                <a href="{{ route('pegawai.create') }}" 
+                   class="btn btn-sm btn-primary rounded-pill px-3 d-flex align-items-center shadow-sm quick-btn">
+                    <i class="ti ti-plus me-1"></i> Tambah
+                </a>
+            </li>
+
             <!-- Clock -->
             <li class="nav-item mx-3 d-none d-lg-block d-flex align-items-center">
-                <img src="{{ asset('img/icons/clock1') }}" alt="Jam" class="me-2" style="height:45px;">
+                <i class="ti ti-clock me-2 text-secondary"></i>
                 <span id="clock" class="fw-semibold text-muted"></span>
             </li>
 
@@ -121,6 +135,7 @@
 </nav>
 
 <style>
+    /* Divider */
     .soft-divider {
         width: 1px;
         height: 28px;
@@ -131,10 +146,50 @@
     body:not(.dark-mode) .soft-divider {
         background: rgba(0, 0, 0, 0.1);
     }
+
+    /* Search Box */
+    .search-box { position: relative; }
+    .search-input {
+        border-radius: 2rem;
+        padding-left: 1rem;
+        padding-right: 2.5rem;
+        box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+    }
+    .search-btn {
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        border: none;
+        background: transparent;
+        color: #888;
+        font-size: 1rem;
+    }
+    .search-btn:hover { color: #333; }
+
+    /* Hover Animations */
+    .nav-link {
+        transition: all 0.3s ease;
+    }
+    .nav-link:hover {
+        background: rgba(0,0,0,0.05);
+        transform: scale(1.1);
+    }
+    body.dark-mode .nav-link:hover {
+        background: rgba(255,255,255,0.1);
+    }
+    .quick-btn:hover {
+        transform: scale(1.05);
+    }
+
+    /* Smooth transition for dark mode */
+    body {
+        transition: background 0.4s ease, color 0.4s ease;
+    }
 </style>
 
 <script>
-    // Clock
+    // ⏰ Clock
     function updateClock() {
         let now = new Date();
         document.getElementById('clock').innerText =
@@ -143,8 +198,44 @@
     setInterval(updateClock, 1000);
     updateClock();
 
-    // Theme Toggle
-    document.getElementById('theme-toggle').addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
+ // 👋 Greeting
+function updateGreeting() {
+    let now = new Date();
+    let hour = now.getHours();
+    let greeting = "";
+
+    if (hour < 11) greeting = "Selamat Pagi ☀️";
+    else if (hour < 15) greeting = "Selamat Siang 🌤️";
+    else if (hour < 18) greeting = "Selamat Sore 🌅";
+    else greeting = "Selamat Malam 🌙";
+
+    document.getElementById("greeting").innerText = greeting;
+}
+
+    // jalankan saat load
+    updateGreeting();
+
+    // update tiap menit (biar otomatis ganti kalau jam berubah)
+    setInterval(updateGreeting, 60000);
+
+    // 🌗 Theme Toggle
+    document.getElementById('theme-toggle').addEventListener('click', function () {
+        let body = document.body;
+        // toggle mode
+        body.classList.toggle('dark-mode');
+
+        // cek mode setelah toggle
+        let isDark = body.classList.contains("dark-mode");
+
+        // ubah icon sesuai mode
+        let themeIcon = document.getElementById("theme-icon");
+        if (isDark) {
+            themeIcon.src = "{{ asset('img/icons/moon.png') }}";
+        } else {
+            themeIcon.src = "{{ asset('img/icons/sun.png') }}";
+        }
+
+        // update greeting sesuai mode baru
+        updateGreeting();
     });
 </script>

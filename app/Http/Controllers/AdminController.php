@@ -133,13 +133,14 @@ $leaderboard = Pegawai::withCount(['absensi' => function ($q) {
 $motivasiList = [
     "radit mojokerto.",
     "ilham kegelapan.",
-    "supri kapal.",
+    "supri kapal api.",
     "smilikitiw.",
-    "sigit ngawi khas magetan."
+    "sigit ngawi khas magetan.".
+    "rehan endemik langka.",
+    "rahmat kopling.",
 ];
 $motivasi = $motivasiList[array_rand($motivasiList)];
 
-    // --- Kirim ke view ---
     return view('admin.index', compact(
         'jumlahPegawai',
         'totalDepartemen',

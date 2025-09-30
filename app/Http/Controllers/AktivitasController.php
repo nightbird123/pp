@@ -7,10 +7,10 @@ use App\Models\Aktivitas;
 
 class AktivitasController extends Controller
 {
-    // Hapus semua aktivitas
+   
     public function reset()
     {
-        Aktivitas::truncate(); // hapus semua data
+        Aktivitas::truncate(); 
         return redirect()->back()->with('success', 'Aktivitas berhasil direset.');
     }
 

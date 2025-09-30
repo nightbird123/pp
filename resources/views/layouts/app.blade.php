@@ -7,7 +7,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>{{ config('app.name', 'Laravel') }}</title>
-
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -25,6 +24,54 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
     <style>
+
+.card-dashboard {
+    position: relative;
+    overflow: hidden;
+    border-radius: 1rem;
+    min-height: 200px;  /* tinggi seragam minimal */
+    height: 100%;
+    color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* overlay gelap tipis */
+.card-dashboard::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
+    z-index: 1;
+    transition: background 0.3s ease;
+}
+
+/* isi card tetap di atas overlay */
+.card-dashboard .card-body {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    text-align: center;
+}
+
+.card-dashboard .card-body i,
+.card-dashboard .card-body h6,
+.card-dashboard .card-body h2 {
+    color: #fff;
+}
+
+/* efek hover */
+.card-dashboard:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+.card-dashboard:hover::before {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.4));
+}
+
+
         
            .btn-gradient {
         background: linear-gradient(45deg, #17a2b8, #0d6efd); /* gradasi toska → biru */
@@ -161,15 +208,33 @@
             min-height: 100vh;
         }
 
-        /* Navbar */
-        .layout-navbar {
-            position: sticky;
-            top: 2px;
-            z-index: 1040;
-            background-color: #f9fafb !important;
-            color: #111827 !important;
-            border-bottom: 1px solid #d1d5db;
-        }
+       /* Navbar Base */
+.layout-navbar {
+    position: sticky;
+    top: 0;
+    z-index: 1040;
+    padding: 0.5rem 1rem;
+
+    /* warna default light mode */
+    background: rgba(255, 255, 255, 0.9) !important;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    color: #111827 !important;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* Navbar saat dark mode */
+body.dark-mode .layout-navbar {
+    background: #2d2d2d !important; /* Abu-abu terang */
+    color: #ffffff !important;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+
+
+
+
+        
 
         /* Konten */
         .content-wrapper {

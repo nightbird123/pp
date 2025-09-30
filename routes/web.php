@@ -18,6 +18,7 @@ use App\Http\Controllers\Hrd\HrdDashboardController;
 use App\Http\Controllers\Hrd\PegawaiController as HrdPegawaiController;
 use App\Http\Controllers\Hrd\LaporanController as HrdLaporanController;
 use App\Http\Controllers\NotifikasiController;
+
 // Default route ke login
 Route::get('/', function () {
     return view('landing');

@@ -36,24 +36,18 @@
                                         </button>
                                         <ul class="dropdown-menu animate-dropdown"
                                             aria-labelledby="dropdownMenuButton{{ $a->id }}">
-
-                                            {{-- 🔍 Detail --}}
                                             <li>
                                                 <a class="dropdown-item text-info"
                                                     href="{{ route('admin.absensi.show', $a->id) }}">
                                                     <i class="bi bi-eye"></i> Detail
                                                 </a>
                                             </li>
-
-                                            {{-- ✏️ Edit --}}
                                             <li>
                                                 <a class="dropdown-item text-warning"
                                                     href="{{ route('admin.absensi.edit', $a->id) }}">
                                                     <i class="bi bi-pencil-square"></i> Edit
                                                 </a>
                                             </li>
-
-                                            {{-- 🗑 Hapus --}}
                                             <li>
                                                 <form action="{{ route('admin.absensi.destroy', $a->id) }}" method="POST"
                                                     class="form-hapus">

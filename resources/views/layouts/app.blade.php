@@ -24,79 +24,111 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
 
     <style>
-
-.card-dashboard {
-    position: relative;
-    overflow: hidden;
-    border-radius: 1rem;
-    min-height: 200px;  /* tinggi seragam minimal */
-    height: 100%;
-    color: #fff;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+        /* Default (light mode) */
+.dropdown-user-header {
+  background-color: #f8f9fa; /* abu terang */
+  color: #212529;
 }
 
-/* overlay gelap tipis */
-.card-dashboard::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.3));
-    z-index: 1;
-    transition: background 0.3s ease;
+.dropdown-user-header small {
+  color: #6c757d; /* abu-abu role */
 }
 
-/* isi card tetap di atas overlay */
-.card-dashboard .card-body {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 100%;
-    text-align: center;
+/* Dark mode */
+body.dark-mode .dropdown-user-header {
+  background-color: #2b2b2b; /* abu gelap */
+  color: #f8f9fa;
 }
 
-.card-dashboard .card-body i,
-.card-dashboard .card-body h6,
-.card-dashboard .card-body h2 {
-    color: #fff;
+body.dark-mode .dropdown-user-header small {
+  color: rgba(255, 255, 255, 0.65); /* abu terang untuk role */
 }
 
-/* efek hover */
-.card-dashboard:hover {
-    transform: scale(1.03);
-    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-}
-.card-dashboard:hover::before {
-    background: linear-gradient(to bottom, rgba(0,0,0,0.15), rgba(0,0,0,0.4));
+/* Dropdown body default (light mode) */
+.dropdown-menu {
+  background-color: #fff;
+  color: #212529;
 }
 
+/* Dark mode */
+body.dark-mode .dropdown-menu {
+  background-color: #1e1e1e; /* abu tua */
+  color: #f8f9fa;
+}
 
-        
-           .btn-gradient {
-        background: linear-gradient(45deg, #17a2b8, #0d6efd); /* gradasi toska → biru */
-        color: #fff;
-        border: none;
-        padding: 5px 12px;
-        border-radius: 8px;
-        font-weight: 600;
-        font-size: 0.85rem;
-        transition: 0.2s ease-in-out;
-    }
-    .btn-gradient:hover {
-        background: linear-gradient(45deg, #138496, #0b5ed7); /* lebih gelap saat hover */
-        color: #fff;
-    }
-    .btn-gradient:focus {
-        box-shadow: 0 0 0 0.2rem rgba(13,110,253,.4);
-    }
-        /* ====================== DARK MODE ====================== */
+body.dark-mode .dropdown-menu .dropdown-item {
+  color: #f8f9fa;
+}
+
+body.dark-mode .dropdown-menu .dropdown-item:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+        .card-dashboard {
+            position: relative;
+            overflow: hidden;
+            border-radius: 1rem;
+            min-height: 200px;
+            height: 100%;
+            color: #fff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card-dashboard::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.3));
+            z-index: 1;
+            transition: background 0.3s ease;
+        }
+        .card-dashboard .card-body {
+            position: relative;
+            z-index: 2;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            height: 100%;
+            text-align: center;
+        }
+
+        .card-dashboard .card-body i,
+        .card-dashboard .card-body h6,
+        .card-dashboard .card-body h2 {
+            color: #fff;
+        }
+        .card-dashboard:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .card-dashboard:hover::before {
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.4));
+        }
+
+         .btn-gradient {
+            background: linear-gradient(45deg, #17a2b8, #0d6efd);
+            color: #fff;
+            border: none;
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.2s ease-in-out;
+        }
+
+        .btn-gradient:hover {
+            background: linear-gradient(45deg, #138496, #0b5ed7);
+            color: #fff;
+        }
+
+        .btn-gradient:focus {
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, .4);
+        }
         body.dark-mode {
             background-color: #121212 !important;
             color: #f5f5f5 !important;
         }
 
-        /* Navbar Dark */
         body.dark-mode .navbar,
         body.dark-mode .layout-navbar {
             background-color: #1f1f1f !important;
@@ -104,7 +136,6 @@
             border-bottom: 1px solid #333 !important;
         }
 
-        /* Sidebar Dark */
         body.dark-mode .layout-menu {
             background: linear-gradient(180deg, #1f2937, #111827) !important;
             color: #f5f5f5 !important;
@@ -125,7 +156,6 @@
             box-shadow: inset 2px 0 0 #3b82f6;
         }
 
-        /* Card/Panel Dark */
         body.dark-mode .card,
         body.dark-mode .dropdown-menu {
             background-color: #1e1e1e !important;
@@ -133,7 +163,6 @@
             border: 1px solid #333 !important;
         }
 
-        /* Input Dark */
         body.dark-mode input.form-control,
         body.dark-mode select.form-select,
         body.dark-mode textarea.form-control {
@@ -142,17 +171,14 @@
             border: 1px solid #444 !important;
         }
 
-        /* Divider Dark */
         body.dark-mode .soft-divider {
             background: rgba(255, 255, 255, 0.15) !important;
         }
 
-        /* Layout Page Dark */
         body.dark-mode .layout-page {
             background-color: #18181b !important;
         }
 
-        /* ====================== SIDEBAR DEFAULT ====================== */
         .layout-menu {
             position: fixed !important;
             top: 0;
@@ -161,14 +187,11 @@
             height: 100vh !important;
             overflow-y: auto !important;
             background: linear-gradient(180deg, #2563eb, #1e3a8a);
-            /* biru gradasi */
             color: #f9fafb !important;
             z-index: 1030;
             box-shadow: 2px 0 12px rgba(0, 0, 0, 0.1);
-            /* bayangan halus */
         }
 
-        /* Judul Sidebar */
         .layout-menu h4,
         .layout-menu .menu-header {
             color: #ffffff !important;
@@ -176,10 +199,8 @@
             letter-spacing: .5px;
         }
 
-        /* Link Sidebar */
         .layout-menu .menu-link {
             color: #e0e7ff !important;
-            /* biru muda */
             padding: 10px 16px;
             border-radius: 8px;
             transition: all 0.3s ease;
@@ -189,59 +210,42 @@
             background-color: rgba(255, 255, 255, 0.15) !important;
             color: #ffffff !important;
             transform: translateX(5px);
-            /* efek geser */
         }
 
-        /* Link Aktif */
         .layout-menu .menu-item.active>.menu-link {
             background-color: rgba(255, 255, 255, 0.25) !important;
             color: #fff !important;
             font-weight: 600;
             box-shadow: inset 2px 0 0 #3b82f6;
-            /* garis kiri */
         }
 
-        /* Layout Page */
         .layout-page {
             margin-left: 260px !important;
             background-color: #f3f4f6 !important;
             min-height: 100vh;
         }
 
-       /* Navbar Base */
-.layout-navbar {
-    position: sticky;
-    top: 0;
-    z-index: 1040;
-    padding: 0.5rem 1rem;
+        .layout-navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1040;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.9) !important;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            color: #111827 !important;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        }
 
-    /* warna default light mode */
-    background: rgba(255, 255, 255, 0.9) !important;
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(8px);
-    color: #111827 !important;
-    border-bottom: 1px solid rgba(0,0,0,0.05);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-}
-
-/* Navbar saat dark mode */
-body.dark-mode .layout-navbar {
-    background: #2d2d2d !important; /* Abu-abu terang */
-    color: #ffffff !important;
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-}
-
-
-
-
-        
-
-        /* Konten */
+        body.dark-mode .layout-navbar {
+            background: #2d2d2d !important;
+            color: #ffffff !important;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
         .content-wrapper {
             padding: 20px;
         }
-
-        /* Efek animasi dropdown */
         .dropdown-menu {
             transition: all 0.3s ease;
         }
@@ -249,8 +253,6 @@ body.dark-mode .layout-navbar {
         .dropdown-menu.show {
             transform: translateY(10px);
         }
-
-        /* Card Dashboard Gradient */
         .dashboard-card {
             border: none;
             border-radius: 1rem;
@@ -263,8 +265,6 @@ body.dark-mode .layout-navbar {
             transform: translateY(-6px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
         }
-
-        /* Warna per card */
         .card-pegawai {
             background: linear-gradient(135deg, #6366f1, #3b82f6) !important;
         }
@@ -285,118 +285,170 @@ body.dark-mode .layout-navbar {
             background: #6b7280 !important;
             color: #fff;
         }
-        /* Perbaikan navbar dark-mode lebih kuat */
-body.dark-mode .layout-navbar,
-body.dark-mode .layout-navbar.navbar,
-body.dark-mode .layout-navbar.navbar.navbar-expand-xl,
-body.dark-mode .layout-navbar.navbar.navbar-expand-lg,
-body.dark-mode .layout-navbar.navbar.navbar-expand-md,
-body.dark-mode .layout-navbar.navbar.navbar-expand-sm {
-    background-color: #1f1f1f !important;
-    color: #f5f5f5 !important;
-    border-bottom: 1px solid #333 !important;
-}
+        body.dark-mode .layout-navbar,
+        body.dark-mode .layout-navbar.navbar,
+        body.dark-mode .layout-navbar.navbar.navbar-expand-xl,
+        body.dark-mode .layout-navbar.navbar.navbar-expand-lg,
+        body.dark-mode .layout-navbar.navbar.navbar-expand-md,
+        body.dark-mode .layout-navbar.navbar.navbar-expand-sm {
+            background-color: #1f1f1f !important;
+            color: #f5f5f5 !important;
+            border-bottom: 1px solid #333 !important;
+        }
 
-body.dark-mode .layout-navbar * {
-    color: #f5f5f5 !important;
-}
-/* Chart text agar putih saat dark mode */
-body.dark-mode .apexcharts-tooltip,
-body.dark-mode .apexcharts-tooltip-text,
-body.dark-mode .apexcharts-legend-text,
-body.dark-mode .apexcharts-title-text,
-body.dark-mode .apexcharts-xaxis-title,
-body.dark-mode .apexcharts-yaxis-title,
-body.dark-mode .apexcharts-xaxis-label,
-body.dark-mode .apexcharts-yaxis-label {
-    color: #f5f5f5 !important;
-    fill: #f5f5f5 !important; /* untuk SVG text */
-}
+        body.dark-mode .layout-navbar * {
+            color: #f5f5f5 !important;
+        }
 
-/* Tooltip background */
-body.dark-mode .apexcharts-tooltip {
-    background: #1e1e1e !important;
-    border: 1px solid #333 !important;
-}
+        body.dark-mode .apexcharts-tooltip,
+        body.dark-mode .apexcharts-tooltip-text,
+        body.dark-mode .apexcharts-legend-text,
+        body.dark-mode .apexcharts-title-text,
+        body.dark-mode .apexcharts-xaxis-title,
+        body.dark-mode .apexcharts-yaxis-title,
+        body.dark-mode .apexcharts-xaxis-label,
+        body.dark-mode .apexcharts-yaxis-label {
+            color: #f5f5f5 !important;
+            fill: #f5f5f5 !important;
+        }
+        body.dark-mode .apexcharts-tooltip {
+            background: #1e1e1e !important;
+            border: 1px solid #333 !important;
+        }
+        .search-box {
+            position: relative;
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+        }
 
-/* Kotak Search Lebih Jelas */
-/* ===== Search Box Styling ===== */
-.search-box {
-    position: relative;
-    max-width: 600px; /* dari 320px jadi lebih panjang */
-    width: 100%;
-    margin: 0 auto;   /* biar agak ke tengah */
-}
+        .search-box .search-input {
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background: #f9f9f9;
+            padding-right: 40px;
+            transition: all 0.25s ease;
+            font-size: 0.9rem;
+        }
+        .search-box .search-input:hover {
+            background: #fff;
+            border-color: #bbb;
+        }
 
-.search-box .search-input {
-    border-radius: 8px;
-    border: 1px solid #ddd;
-    background: #f9f9f9;
-    padding-right: 40px; /* ruang buat icon */
-    transition: all 0.25s ease;
-    font-size: 0.9rem;
-}
+        .search-box .search-input:focus {
+            outline: none;
+            border-color: #666;
+            box-shadow: 0 0 0 2px rgba(100, 100, 100, 0.2);
+        }
+        .search-box .search-btn {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            border: none;
+            background: transparent;
+            color: #666;
+            font-size: 18px;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+        }
 
-/* Hover & Focus */
-.search-box .search-input:hover {
-    background: #fff;
-    border-color: #bbb;
-}
-.search-box .search-input:focus {
-    outline: none;
-    border-color: #666;
-    box-shadow: 0 0 0 2px rgba(100,100,100,0.2);
-}
+        .search-box .search-btn:hover {
+            color: #000;
+        }
+        body.dark-mode .search-box .search-input {
+            background: #2c2c2c;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #eee;
+        }
 
-/* Tombol ikon kanan */
-.search-box .search-btn {
-    position: absolute;
-    right: 10px;
-    top: 50%;
-    transform: translateY(-50%);
-    border: none;
-    background: transparent;
-    color: #666;
-    font-size: 18px;
-    cursor: pointer;
-    padding: 0;
-    line-height: 1;
-}
+        body.dark-mode .search-box .search-btn {
+            color: #bbb;
+        }
 
-.search-box .search-btn:hover {
-    color: #000;
-}
+        body.dark-mode .search-box .search-btn:hover {
+            color: #fff;
+        }
+        body.dark-mode table,
+        body.dark-mode .table {
+            background-color: transparent !important;
+            color: #f1f1f1 !important;
+            border-color: rgba(255, 255, 255, 0.15) !important;
+        }
 
-/* Dark mode */
-body.dark-mode .search-box .search-input {
-    background: #2c2c2c;
-    border: 1px solid rgba(255,255,255,0.2);
-    color: #eee;
-}
-body.dark-mode .search-box .search-btn {
-    color: #bbb;
-}
-body.dark-mode .search-box .search-btn:hover {
-    color: #fff;
-}
+        body.dark-mode .table thead th {
+            color: #e5e5e5 !important;
+            border-color: rgba(255, 255, 255, 0.2) !important;
+        }
 
+        body.dark-mode .table tbody td {
+            color: #ddd !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
 
+        body.dark-mode .list-group-item {
+            background-color: #1e1e1e !important;
+            color: #f1f1f1 !important;
+            border-color: rgba(255, 255, 255, 0.1) !important;
+        }
+        body.dark-mode .card .card-header,
+        body.dark-mode .card h5,
+        body.dark-mode .card h6,
+        body.dark-mode .card-title,
+        body.dark-mode .card-header h5,
+        body.dark-mode .card-header h6 {
+            color: #f5f5f5 !important;
+        }
+        body.dark-mode .apexcharts-title-text {
+            fill: #f5f5f5 !important;
+            color: #f5f5f5 !important;
+        }
+        body.light-mode {
+            --bg-color: #f9f9f9;
+            --box-color: #ffffff;
+            --text-color: #000000;
+            --text-muted: #666666;
+        }
+        body.dark-mode {
+            --bg-color: #121212;
+            --box-color: #1e1e2d;
+            --text-color: #e5e5e5;
+            --text-muted: #aaaaaa;
+        }
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+        }
 
+        .card,
+        .box,
+        .table {
+            background-color: var(--box-color);
+            color: var(--text-color);
+        }
 
+        .table th,
+        .table td {
+            color: var(--text-color);
+        }
 
+        .text-muted {
+            color: var(--text-muted) !important;
+        }
+        
     </style>
-    
+
 </head>
 
 <body>
     <div class="layout-wrapper layout-content-navbar">
         <div class="layout-container">
 
-            {{-- Sidebar --}}
             @include('layouts.sidebar')
 
             <div class="layout-page">
-                {{-- Navbar --}}
+
                 @include('layouts.navbar')
 
                 <div class="content-wrapper">
@@ -410,14 +462,12 @@ body.dark-mode .search-box .search-btn:hover {
         </div>
     </div>
 
-    <!-- Bootstrap + Vuexy JS via CDN -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://demos.pixinvent.com/vuexy-html-admin-template/assets/vendor/js/core.js"></script>
     <script src="https://demos.pixinvent.com/vuexy-html-admin-template/assets/vendor/js/menu.js"></script>
     <script src="https://demos.pixinvent.com/vuexy-html-admin-template/assets/vendor/js/main.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <!-- Script Konfirmasi Hapus -->
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const forms = document.querySelectorAll('.form-hapus');
@@ -441,7 +491,6 @@ body.dark-mode .search-box .search-btn:hover {
                 });
             });
 
-            // ================= DARK MODE TOGGLE =================
             const body = document.body;
             const darkModeToggle = document.createElement('button');
             darkModeToggle.innerHTML = '<i class="bi bi-moon"></i>';
@@ -450,14 +499,11 @@ body.dark-mode .search-box .search-btn:hover {
             darkModeToggle.style.right = '20px';
             darkModeToggle.style.zIndex = '2000';
             document.body.appendChild(darkModeToggle);
-
-            // Cek dari localStorage
             if (localStorage.getItem('dark-mode') === 'enabled') {
                 body.classList.add('dark-mode');
                 darkModeToggle.innerHTML = '<i class="bi bi-sun"></i>';
             }
 
-            // Klik toggle
             darkModeToggle.addEventListener('click', () => {
                 body.classList.toggle('dark-mode');
                 if (body.classList.contains('dark-mode')) {
@@ -473,5 +519,6 @@ body.dark-mode .search-box .search-btn:hover {
 
     @stack('scripts')
 </body>
+
 
 </html>

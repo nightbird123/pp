@@ -49,7 +49,7 @@
                                                     <button class="btn btn-sm btn-gradient dropdown-toggle shadow-glow"
                                                         type="button" id="dropdownMenuButton{{ $p->id }}"
                                                         data-bs-toggle="dropdown" data-bs-boundary="viewport"
-                                                        {{-- 🔑 ini penting --}} aria-expanded="false">
+                                                        aria-expanded="false">
                                                         <i class="bi bi-magic"></i> Aksi
                                                     </button>
                                                     <ul class="dropdown-menu animate-dropdown"

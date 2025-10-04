@@ -17,26 +17,24 @@ class Pegawai extends Model
         'tanggal_masuk', 
         'jabatan', 
         'departemen_id',
-        'hrd_id' // tambahin biar bisa mass assignment
+        'hrd_id' 
     ];
 
-    // Relasi ke Departemen
     public function departemen()
     {
         return $this->belongsTo(Departemen::class, 'departemen_id');
     }
 
-    // Relasi ke HRD
     public function hrd()
     {
         return $this->belongsTo(Hrd::class, 'hrd_id');
     }
-        // relasi ke absensi
+
     public function absensi()
     {
         return $this->hasMany(Absensi::class, 'pegawai_id');
     }
-        // relasi ke cuti
+     
     public function cuti()
     {
         return $this->hasMany(Cuti::class, 'pegawai_id');

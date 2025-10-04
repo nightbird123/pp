@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Cuti;
 use App\Models\Pegawai;
-use App\Models\Aktivitas; // pake Aktivitas model
+use App\Models\Aktivitas; 
 
 class CutiController extends Controller
 {
@@ -34,8 +34,6 @@ class CutiController extends Controller
         ]);
 
         $cuti = Cuti::create($request->all());
-
-        // === simpan ke tabel aktivitas ===
         Aktivitas::create([
             'deskripsi' => 'Menambahkan cuti untuk pegawai: ' . $cuti->pegawai->nama,
             'user_id'   => auth()->id(),
@@ -64,8 +62,6 @@ class CutiController extends Controller
 
         $cuti = Cuti::findOrFail($id);
         $cuti->update($request->all());
-
-        // === simpan ke tabel aktivitas ===
         Aktivitas::create([
             'deskripsi' => 'Mengubah data cuti pegawai: ' . $cuti->pegawai->nama,
             'user_id'   => auth()->id(),
@@ -85,8 +81,6 @@ class CutiController extends Controller
         $cuti = Cuti::findOrFail($id);
         $namaPegawai = $cuti->pegawai->nama;
         $cuti->delete();
-
-        // === simpan ke tabel aktivitas ===
         Aktivitas::create([
             'deskripsi' => 'Menghapus cuti pegawai: ' . $namaPegawai,
             'user_id'   => auth()->id(),

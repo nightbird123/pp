@@ -9,7 +9,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('pegawai', function (Blueprint $table) {
-            // cukup ubah jadi nullable, jangan tambahkan unique lagi
             $table->string('email')->nullable()->change();
         });
     }
@@ -17,7 +16,7 @@ return new class extends Migration
   public function down(): void
 {
     Schema::table('pegawai', function (Blueprint $table) {
-        $table->string('email')->nullable()->change(); // jangan paksa not null
+        $table->string('email')->nullable()->change(); 
     });
 }
 

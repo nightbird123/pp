@@ -3,6 +3,6 @@
 @section('content')
 <div class="container">
     <h3>Edit Profile</h3>
-    <p>Di sini nanti form untuk update data user.</p>
+    <p>Halaman digunakan untuk mengubah profil pengguna.</p>
 </div>
 @endsection

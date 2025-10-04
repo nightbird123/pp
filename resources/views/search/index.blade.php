@@ -23,7 +23,6 @@
                         <td>{{ $p->nama }}</td>
                         <td>{{ $p->jabatan }}</td>
                         <td>
-                            {{-- Pastikan relasi ada di model Pegawai --}}
                             {{ $p->departemen ? $p->departemen->nama_departemen : '-' }}
                         </td>
                     </tr>

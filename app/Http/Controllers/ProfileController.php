@@ -24,7 +24,6 @@ class ProfileController extends Controller
             'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        // Upload foto kalau ada
         if ($request->hasFile('profile_photo')) {
             if ($user->profile_photo) {
                 Storage::delete('public/' . $user->profile_photo);

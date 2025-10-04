@@ -9,9 +9,7 @@
         <div class="card-body">
             <form action="{{ route('profile.update') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                @method('PUT') {{-- gunakan PUT sesuai standar update --}}
-
-                {{-- Nama --}}
+                @method('PUT') 
                 <div class="mb-3">
                     <label for="name" class="form-label">Nama</label>
                     <input type="text" id="name" name="name" 
@@ -21,8 +19,6 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
-                {{-- Email --}}
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
                     <input type="email" id="email" name="email" 
@@ -48,8 +44,6 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
-                {{-- Tombol --}}
                 <div class="d-flex justify-content-end">
                     <a href="{{ url()->previous() }}" class="btn btn-secondary me-2">Batal</a>
                     <button type="submit" class="btn btn-primary">Simpan</button>

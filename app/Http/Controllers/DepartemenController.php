@@ -12,12 +12,7 @@ public function index()
     $departemen = Departemen::withCount('pegawai')->get();
     return view('departemen.index', compact('departemen'));
 }
-
-
-
-
-
-    public function create() {
+public function create() {
         return view('departemen.create');
     }
 

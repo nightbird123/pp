@@ -21,7 +21,6 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $d->nama_departemen }}</td>
                             <td>{{ $d->pegawai_count }}</td>
-                            <!-- jumlah pegawai -->
                             <td class="text-center">
                                 <div class="dropdown dropstart">
                                     <button class="btn btn-sm btn-gradient dropdown-toggle shadow-glow" type="button"

@@ -3,7 +3,6 @@
         <a href="{{ Auth::user()->role == 'admin' ? url('/admin/dashboard') : url('/hrd/dashboard') }}"
             class="app-brand-link">
             <span class="app-brand-logo demo">
-                <!-- Logo SVG putih -->
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="white"
                     class="bi bi-people-circle" viewBox="0 0 16 16">
                     <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0" />
@@ -24,7 +23,6 @@
     <div class="menu-inner-shadow"></div>
 
     <ul class="menu-inner py-1">
-        <!-- Dashboard -->
         <li class="menu-item">
             <a href="{{ Auth::user()->role == 'admin' ? url('/admin/dashboard') : url('/hrd/dashboard') }}"
                 class="menu-link">
@@ -34,7 +32,6 @@
         </li>
 
         @if (Auth::user()->role == 'admin')
-            <!-- Menu khusus Admin -->
             <li class="menu-item">
                 <a href="{{ route('pegawai.index') }}" class="menu-link">
                     <i class="menu-icon ti ti-users"></i>
@@ -53,8 +50,6 @@
                     <div>Kelola HRD</div>
                 </a>
             </li>
-
-            <!-- Header Laporan -->
             <li class="menu-header small text-uppercase">Laporan</li>
 
             <li class="menu-item">
@@ -76,7 +71,6 @@
                 </a>
             </li>
         @elseif(Auth::user()->role == 'hrd')
-            <!-- Menu khusus HRD -->
             <li class="menu-item">
                 <a href="{{ route('pegawai.index') }}" class="menu-link">
                     <i class="menu-icon ti ti-users"></i>

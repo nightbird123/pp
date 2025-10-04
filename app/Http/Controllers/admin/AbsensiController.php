@@ -37,7 +37,6 @@ class AbsensiController extends Controller
             'deskripsi' => "Absensi ditambahkan untuk pegawai: " . $absensi->pegawai->nama,
         ]);
 
-        //  notif session
         $notif = session()->get('notif', []);
         $notif[] = 'Absensi berhasil ditambahkan';
         session()->put('notif', $notif);
@@ -70,7 +69,6 @@ class AbsensiController extends Controller
         $absensi = Absensi::findOrFail($id);
         $absensi->update($request->all());
 
-        // Tambah notif ke session
         $notif = session()->get('notif', []);
         $notif[] = 'Absensi berhasil diperbarui';
         session()->put('notif', $notif);
@@ -83,7 +81,6 @@ class AbsensiController extends Controller
         $absensi = Absensi::findOrFail($id);
         $absensi->delete();
 
-        // Tambah notif ke session
         $notif = session()->get('notif', []);
         $notif[] = 'Absensi berhasil dihapus';
         session()->put('notif', $notif);

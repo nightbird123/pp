@@ -15,7 +15,7 @@ class CutiSeeder extends Seeder
             $selesai = (clone $mulai)->addDays(rand(1,5));
 
             Cuti::create([
-                'pegawai_id'      => rand(1, 5), // sesuaikan sama pegawai
+                'pegawai_id'      => rand(1, 5), 
                 'tanggal_mulai'   => $mulai,
                 'tanggal_selesai' => $selesai,
                 'status'          => ['Pending','Disetujui','Ditolak'][array_rand(['Pending','Disetujui','Ditolak'])],

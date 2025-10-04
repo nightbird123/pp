@@ -19,13 +19,11 @@ class Hrd extends Model
         'status',
     ];
 
-    // Relasi ke Departemen
     public function departemen()
     {
         return $this->belongsTo(Departemen::class, 'departemen_id');
     }
 
-    // Relasi ke Pegawai
 public function pegawai()
 {
     return $this->hasMany(Pegawai::class, 'departemen_id', 'departemen_id');

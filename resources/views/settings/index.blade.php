@@ -8,8 +8,10 @@
     <div class="alert alert-success">{{ session('success') }}</div>
   @endif
 
-  <form action="{{ route('settings.update') }}" method="POST">
+ <form action="{{ route('settings.update') }}" method="POST">
     @csrf
+    @method('PUT')
+
 
     <!-- Pilihan Tema -->
     <div class="mb-3">
@@ -20,8 +22,6 @@
         <option value="system" {{ session('theme') == 'system' ? 'selected' : '' }}>System</option>
       </select>
     </div>
-
-    <!-- Pilihan Bahasa -->
     <div class="mb-3">
       <label for="language" class="form-label">Bahasa</label>
       <select name="language" id="language" class="form-select">

@@ -3,8 +3,6 @@
 @section('content')
     <div class="container">
         <h4 class="mb-3">Kelola HRD</h4>
-
-        <!-- Ringkasan -->
         <div class="row mb-4">
             <div class="col-md-4">
                 <div class="card text-center shadow-sm">
@@ -31,11 +29,7 @@
                 </div>
             </div>
         </div>
-
-        <!-- Tombol Tambah HRD -->
         <a href="{{ route('admin.hrd.create') }}" class="btn btn-primary mb-3">Tambah HRD</a>
-
-        <!-- Tabel HRD -->
         <div class="table-responsive">
             <table class="table table-bordered table-striped">
                 <thead>
@@ -66,7 +60,7 @@
                                 <div class="dropdown dropend">
                                     <button class="btn btn-sm btn-gradient dropdown-toggle shadow-glow" type="button"
                                         id="dropdownMenuButton{{ $h->id }}" data-bs-toggle="dropdown"
-                                        data-bs-boundary="viewport" {{-- 🔑 ini penting --}} aria-expanded="false">
+                                        data-bs-boundary="viewport"aria-expanded="false">
                                         <i class="bi bi-magic"></i> Aksi
                                     </button>
                                     <ul class="dropdown-menu animate-dropdown"
@@ -95,8 +89,6 @@
                                         </li>
                                     </ul>
                                 </div>
-
-
                             </td>
 
 

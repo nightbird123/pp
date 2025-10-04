@@ -4,8 +4,6 @@
 <div class="container">
     <h4>Laporan & Ringkasan Data</h4>
     <hr>
-
-    <!-- Ringkasan Angka -->
     <div class="row mb-4">
         <div class="col-md-3">
             <div class="card text-center shadow-sm">
@@ -32,8 +30,6 @@
             </div>
         </div>
     </div>
-
-    <!-- Tabel Ringkasan -->
     <h5>Ringkasan Pegawai per Departemen</h5>
     <table class="table table-bordered table-striped">
         <thead>

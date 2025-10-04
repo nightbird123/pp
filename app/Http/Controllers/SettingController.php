@@ -3,28 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SettingController extends Controller
 {
     public function index()
     {
-        return view('settings.index'); // bikin view settings/index.blade.php
+        $user = Auth::user();
+        return view('settings.index', compact('user'));
     }
 
-    public function update(Request $request)
-    {
-        // Misal update tema, bahasa, dll
-        $request->validate([
-            'theme' => 'nullable|string',
-            'language' => 'nullable|string',
-        ]);
+public function update(Request $request)
+{
+    $request->validate([
+        'language' => 'required|in:id,en',
+        'theme'    => 'required|in:light,dark',
+    ]);
 
-        // Simpan ke session dulu (atau ke database User kalau mau persist)
-        session([
-            'theme' => $request->theme,
-            'language' => $request->language,
-        ]);
+    // Simpan pilihan ke session, bukan database
+    session([
+        'language' => $request->language,
+        'theme'    => $request->theme,
+    ]);
 
-        return redirect()->route('settings')->with('success', 'Pengaturan berhasil disimpan.');
-    }
+    return back()->with('success', 'Pengaturan berhasil disimpan!');
+}
+
 }

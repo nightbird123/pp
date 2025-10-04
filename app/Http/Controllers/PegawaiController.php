@@ -24,7 +24,6 @@ class PegawaiController extends Controller
 
    public function store(Request $request)
 {
-    // Validasi input
     $validated = $request->validate([
         'nip'           => 'nullable|string|max:50',
         'nama'          => 'required|string|max:100',
@@ -36,10 +35,7 @@ class PegawaiController extends Controller
         'departemen_id' => 'required|exists:departemen,id',
     ]);
 
-    // Simpan data pegawai
     $pegawai = Pegawai::create($validated);
-
-    // Log aktivitas
     Aktivitas::create([
         'deskripsi' => 'Pegawai baru ditambahkan: ' . $pegawai->nama,
     ]);

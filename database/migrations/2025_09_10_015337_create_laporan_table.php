@@ -15,7 +15,7 @@ return new class extends Migration
     $table->id();
     $table->string('judul');
     $table->longText('isi');
-    $table->unsignedBigInteger('user_id'); // siapa yang buat laporan
+    $table->unsignedBigInteger('user_id'); 
     $table->timestamps();
 
     $table->foreign('user_id')->references('id')->on('users');

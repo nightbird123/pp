@@ -1,7 +1,5 @@
 <nav class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme shadow-sm px-3"
     id="layout-navbar">
-
-    <!-- Toggle Sidebar (Mobile) -->
     <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 d-xl-none">
         <a class="nav-item nav-link px-0" href="javascript:void(0)">
             <i class="ti ti-menu-2 ti-md"></i>
@@ -9,8 +7,6 @@
     </div>
 
     <div class="d-flex align-items-center justify-content-between flex-grow-1" id="navbar-collapse">
-
-        <!-- Search -->
         <div class="flex-grow-1 d-flex justify-content-center">
             <form action="{{ route('search') }}" method="GET" class="w-100" style="max-width:600px;">
                 <div class="search-box">
@@ -23,47 +19,38 @@
             </form>
         </div>
 
-        <!-- Divider Soft -->
         <div class="soft-divider d-none d-lg-block"></div>
 
-        <!-- Right Side -->
         <ul class="navbar-nav d-flex align-items-center flex-row gap-3 mb-0">
 
-            <!-- Greeting -->
             <li class="nav-item d-none d-lg-flex align-items-center text-muted fw-semibold">
                 <i class="ti ti-sun me-2 text-warning"></i>
                 <span id="greeting"></span>
             </li>
 
-            <!-- Quick Action -->
             <li class="nav-item mx-2">
-                <a href="{{ route('pegawai.create') }}" 
-                   class="btn btn-sm btn-primary rounded-pill px-3 d-flex align-items-center shadow-sm quick-btn">
+                <a href="{{ route('pegawai.create') }}"
+                    class="btn btn-sm btn-primary rounded-pill px-3 d-flex align-items-center shadow-sm quick-btn">
                     <i class="ti ti-plus me-1"></i> Tambah
                 </a>
             </li>
-
-            <!-- Clock -->
             <li class="nav-item mx-3 d-none d-lg-block d-flex align-items-center">
                 <i class="ti ti-clock me-2 text-secondary"></i>
                 <span id="clock" class="fw-semibold text-muted"></span>
             </li>
-
-            <!-- Theme Toggle -->
             <li class="nav-item mx-2">
                 <a class="nav-link p-2 rounded-circle bg-light-subtle" href="javascript:void(0)" id="theme-toggle">
-                    <img id="theme-icon" src="{{ asset('img/icons/aun.png') }}" alt="Mode" style="height:22px;">
+                    <img id="theme-icon" src="{{ asset('img/icons/lg.png') }}" alt="Mode" style="height:22px;">
                 </a>
             </li>
-
-            <!-- Notification -->
             <li class="nav-item dropdown mx-2">
                 <a class="nav-link p-2 rounded-circle bg-light-subtle position-relative" href="#"
                     data-bs-toggle="dropdown">
                     <img src="{{ asset('img/icons/bell.png') }}" alt="Notif" style="height:22px;">
 
-                    @if(session('notifs') && count(session('notifs')) > 0)
-                        <span class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle p-1"
+                    @if (session('notifs') && count(session('notifs')) > 0)
+                        <span
+                            class="badge bg-danger rounded-pill position-absolute top-0 start-100 translate-middle p-1"
                             style="font-size: 0.65rem;">
                             {{ count(session('notifs')) }}
                         </span>
@@ -73,7 +60,7 @@
                     <li>
                         <h6 class="dropdown-header d-flex justify-content-between align-items-center">
                             Notifikasi
-                            @if(session('notifs') && count(session('notifs')) > 0)
+                            @if (session('notifs') && count(session('notifs')) > 0)
                                 <form action="{{ route('notif.reset') }}" method="POST" class="d-inline">
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-link text-danger p-0">Reset</button>
@@ -81,8 +68,8 @@
                             @endif
                         </h6>
                     </li>
-                    @if(session('notifs') && count(session('notifs')) > 0)
-                        @foreach(session('notifs') as $notif)
+                    @if (session('notifs') && count(session('notifs')) > 0)
+                        @foreach (session('notifs') as $notif)
                             <li><span class="dropdown-item">{{ $notif }}</span></li>
                         @endforeach
                     @else
@@ -90,52 +77,75 @@
                     @endif
                 </ul>
             </li>
-
-            <!-- User Dropdown -->
             <li class="nav-item dropdown dropdown-user">
+                <!-- NAVBAR: hanya avatar -->
                 <a class="nav-link dropdown-toggle hide-arrow d-flex align-items-center" href="javascript:void(0);"
                     data-bs-toggle="dropdown">
                     <img src="{{ Auth::check() && Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('img/avatars/6.png') }}"
-                        alt="User Avatar" class="rounded-circle border me-2" width="40" height="40">
-                    <div class="d-none d-lg-flex flex-column text-start">
-                        <span class="fw-semibold">{{ Auth::check() ? Auth::user()->name : 'Guest' }}</span>
-                        <small class="text-muted">
-                            @if (Auth::check())
-                                {{ Auth::user()->role === 'admin' ? 'Administrator' : 'HRD' }}
-                            @else
-                                Pengunjung
-                            @endif
-                        </small>
-                    </div>
+                        alt="User Avatar" class="rounded-circle border" width="40" height="40">
                 </a>
-                <ul class="dropdown-menu dropdown-menu-end modern-dropdown shadow-lg border-0 rounded-3 mt-2">
+
+                <!-- DROPDOWN -->
+                <ul class="dropdown-menu dropdown-menu-end shadow-lg border-0 rounded-3 mt-2 p-0 overflow-hidden"
+                    style="min-width: 220px;">
+
+                    <!-- Header User -->
+                    <li class="dropdown-user-header px-3 py-3">
+                        <div class="d-flex align-items-center">
+                            <img src="{{ Auth::check() && Auth::user()->avatar ? asset(Auth::user()->avatar) : asset('img/avatars/6.png') }}"
+                                alt="User Avatar" class="rounded-circle me-3 border" width="45" height="45">
+                            <div class="d-flex flex-column">
+                                <span class="fw-semibold">{{ Auth::check() ? Auth::user()->name : 'Guest' }}</span>
+                                <small>
+                                    @if (Auth::check())
+                                        {{ Auth::user()->role === 'admin' ? 'Administrator' : 'HRD' }}
+                                    @else
+                                        Pengunjung
+                                    @endif
+                                </small>
+                            </div>
+                        </div>
+                    </li>
+
+
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.edit') }}">
+                        <hr class="dropdown-divider m-0">
+                    </li>
+
+                    <!-- Menu Items -->
+                    <li>
+                        <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('profile.edit') }}">
                             <i class="ti ti-user me-2 text-primary"></i> Ubah Profil
                         </a>
                     </li>
                     <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{{ route('settings') }}">
+                        <a class="dropdown-item d-flex align-items-center py-2" href="{{ route('settings') }}">
                             <i class="ti ti-settings me-2 text-warning"></i> Pengaturan
                         </a>
                     </li>
-                    <li><div class="dropdown-divider"></div></li>
+
                     <li>
+                        <hr class="dropdown-divider m-0">
+                    </li>
+
+                    <!-- Logout Tombol -->
+                    <li class="p-2">
                         <form action="{{ route('logout') }}" method="POST">
                             @csrf
-                            <button type="submit" class="dropdown-item text-danger d-flex align-items-center">
+                            <button type="submit"
+                                class="btn btn-danger w-100 d-flex align-items-center justify-content-center">
                                 <i class="ti ti-logout me-2"></i> Logout
                             </button>
                         </form>
                     </li>
                 </ul>
             </li>
+
         </ul>
     </div>
 </nav>
 
 <style>
-    /* Divider */
     .soft-divider {
         width: 1px;
         height: 28px;
@@ -143,18 +153,22 @@
         margin: 0 12px;
         border-radius: 2px;
     }
+
     body:not(.dark-mode) .soft-divider {
         background: rgba(0, 0, 0, 0.1);
     }
 
-    /* Search Box */
-    .search-box { position: relative; }
+    .search-box {
+        position: relative;
+    }
+
     .search-input {
         border-radius: 2rem;
         padding-left: 1rem;
         padding-right: 2.5rem;
-        box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
     }
+
     .search-btn {
         position: absolute;
         right: 0.75rem;
@@ -165,77 +179,75 @@
         color: #888;
         font-size: 1rem;
     }
-    .search-btn:hover { color: #333; }
 
-    /* Hover Animations */
+    .search-btn:hover {
+        color: #333;
+    }
+
     .nav-link {
         transition: all 0.3s ease;
     }
+
     .nav-link:hover {
-        background: rgba(0,0,0,0.05);
+        background: rgba(0, 0, 0, 0.05);
         transform: scale(1.1);
     }
+
     body.dark-mode .nav-link:hover {
-        background: rgba(255,255,255,0.1);
+        background: rgba(255, 255, 255, 0.1);
     }
+
     .quick-btn:hover {
         transform: scale(1.05);
     }
 
-    /* Smooth transition for dark mode */
     body {
         transition: background 0.4s ease, color 0.4s ease;
     }
 </style>
 
 <script>
-    // ⏰ Clock
     function updateClock() {
         let now = new Date();
         document.getElementById('clock').innerText =
-            now.toLocaleTimeString('id-ID', { hour: '2-digit', minute: '2-digit' });
+            now.toLocaleTimeString('id-ID', {
+                hour: '2-digit',
+                minute: '2-digit'
+            });
     }
     setInterval(updateClock, 1000);
     updateClock();
 
- // 👋 Greeting
-function updateGreeting() {
-    let now = new Date();
-    let hour = now.getHours();
-    let greeting = "";
+    function updateGreeting() {
+        let now = new Date();
+        let hour = now.getHours();
+        let greeting = "";
 
-    if (hour < 11) greeting = "Selamat Pagi ☀️";
-    else if (hour < 15) greeting = "Selamat Siang 🌤️";
-    else if (hour < 18) greeting = "Selamat Sore 🌅";
-    else greeting = "Selamat Malam 🌙";
+        if (hour < 11) greeting = "Selamat Pagi ☀️";
+        else if (hour < 15) greeting = "Selamat Siang 🌤️";
+        else if (hour < 18) greeting = "Selamat Sore 🌅";
+        else greeting = "Selamat Malam 🌙";
 
-    document.getElementById("greeting").innerText = greeting;
-}
+        document.getElementById("greeting").innerText = greeting;
+    }
 
-    // jalankan saat load
     updateGreeting();
 
-    // update tiap menit (biar otomatis ganti kalau jam berubah)
     setInterval(updateGreeting, 60000);
 
-    // 🌗 Theme Toggle
-    document.getElementById('theme-toggle').addEventListener('click', function () {
+    document.getElementById('theme-toggle').addEventListener('click', function() {
         let body = document.body;
-        // toggle mode
+
         body.classList.toggle('dark-mode');
 
-        // cek mode setelah toggle
         let isDark = body.classList.contains("dark-mode");
 
-        // ubah icon sesuai mode
         let themeIcon = document.getElementById("theme-icon");
         if (isDark) {
             themeIcon.src = "{{ asset('img/icons/moon.png') }}";
         } else {
-            themeIcon.src = "{{ asset('img/icons/sun.png') }}";
+            themeIcon.src = "{{ asset('img/icons/lg.png') }}";
         }
-
-        // update greeting sesuai mode baru
         updateGreeting();
     });
 </script>

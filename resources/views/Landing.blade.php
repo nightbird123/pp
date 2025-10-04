@@ -23,7 +23,6 @@
       color: #fff;
     }
 
-    /* Navbar */
     .navbar {
       display: flex;
       justify-content: space-between;
@@ -74,8 +73,6 @@
       background: #00aaff;
       color: #fff;
     }
-
-    /* Section umum */
     section {
       padding: 100px 10%;
       min-height: 100vh;
@@ -116,7 +113,6 @@
       margin-bottom: 8px;
     }
 
-    /* Hero */
     .hero h2 {
       font-size: 1.5rem;
       font-weight: 400;
@@ -135,8 +131,6 @@
       font-size: 1rem;
       line-height: 1.6;
     }
-
-    /* Footer */
     footer {
       background: rgba(0, 0, 0, 0.9);
       color: #ddd;
@@ -153,7 +147,6 @@
 </head>
 
 <body>
-  <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">Pegawai Dinas</div>
     <ul>
@@ -165,8 +158,6 @@
     </ul>
     <a href="{{ route('login') }}" class="btn-nav">Login</a>
   </nav>
-
-  <!-- Home -->
   <section class="hero" id="home">
     <h2>Selamat Datang 👋</h2>
     <h1>Aplikasi Data Pegawai Dinas</h1>
@@ -177,8 +168,6 @@
       hanya dalam satu platform.
     </p>
   </section>
-
-  <!-- Tentang -->
   <section id="tentang">
     <h2>Tentang Aplikasi</h2>
     <p>
@@ -199,8 +188,6 @@
       serta menciptakan lingkungan kerja yang lebih tertib dan teratur.
     </p>
   </section>
-
-  <!-- Fitur -->
   <section id="fitur">
     <h2>Fitur Utama</h2>
     <p>Berikut beberapa fitur yang tersedia dalam aplikasi ini:</p>
@@ -211,8 +198,6 @@
       <li>📌 Laporan Pegawai</li>
     </ul>
   </section>
-
-  <!-- Panduan -->
   <section id="panduan">
     <h2>Panduan Singkat</h2>
     <p>Ikuti langkah berikut untuk menggunakan aplikasi:</p>
@@ -224,8 +209,6 @@
       <li>📊 Lihat laporan pegawai untuk analisis data.</li>
     </ul>
   </section>
-
-  <!-- Kontak -->
   <section id="kontak">
     <h2>Kontak</h2>
     <p>Jika ada pertanyaan atau kendala, silakan hubungi:</p>
@@ -235,14 +218,10 @@
       <li>📞 Telepon: (+62) 123456</li>
     </ul>
   </section>
-
-  <!-- Footer -->
   <footer>
     <p>© 2025 Aplikasi Data Pegawai Dinas. All rights reserved.</p>
     <p>Jl. Isekai No.123, Kota Ngawi | Telp: (+62) 1234567</p>
   </footer>
-
-  <!-- Script animasi scroll -->
   <script>
     const sections = document.querySelectorAll("section");
     const observer = new IntersectionObserver(entries => {

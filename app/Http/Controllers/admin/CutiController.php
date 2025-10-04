@@ -33,10 +33,7 @@ class CutiController extends Controller
             'keterangan'      => 'nullable|string',
         ]);
 
-        // simpan cuti
         $cuti = Cuti::create($request->all());
-
-        // buat aktivitas log
         Aktivitas::create([
             'deskripsi' => 'Menambahkan cuti untuk pegawai: ' . $cuti->pegawai->nama,
         ]);
@@ -81,7 +78,7 @@ class CutiController extends Controller
     public function destroy($id)
     {
         $cuti = Cuti::findOrFail($id);
-        $pegawaiNama = $cuti->pegawai->nama; // simpan dulu sebelum delete
+        $pegawaiNama = $cuti->pegawai->nama; 
         $cuti->delete();
 
         Aktivitas::create([

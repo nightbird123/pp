@@ -50,8 +50,6 @@ public function pegawai(Request $request)
             $query->where('departemen_id', $request->departemen_id);
         })
         ->get();
-
-    // langsung arahkan ke view admin/pegawai/index.blade.php
     return view('laporan.index', compact('pegawai', 'departemen'));
 }
 

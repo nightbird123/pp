@@ -8,6 +8,6 @@ class HrdDashboardController extends Controller
 {
     public function index()
     {
-        return view('hrd.index'); // ke resources/views/hrd/index.blade.php
+        return view('hrd.index'); 
     }
 }

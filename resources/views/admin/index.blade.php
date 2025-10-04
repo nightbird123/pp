@@ -2,7 +2,6 @@
 
 @section('content')
     <div class="row g-4">
-        {{-- Jumlah Pegawai --}}
         <div class="col-md-4">
             <div class="card card-dashboard text-white" style="background: url('{{ asset('img/violet.jpeg') }}') center/cover no-repeat;">
                 <div class="card-body text-center bg-dark bg-opacity-50 rounded">
@@ -12,8 +11,6 @@
                 </div>
             </div>
         </div>
-
-        {{-- Jumlah Departemen --}}
         <div class="col-md-4">
             <div class="card card-dashboard" style="background: url('{{ asset('img/v1.jpeg') }}') center/cover no-repeat;">
                 <div class="card-body text-center bg-dark bg-opacity-50 rounded">
@@ -23,8 +20,6 @@
                 </div>
             </div>
         </div>
-
-        {{-- Jumlah HRD --}}
         <div class="col-md-4">
             <div class="card card-dashboard" style="background: url('{{ asset('img/v2.jpeg') }}') center/cover no-repeat;">
                 <div class="card-body text-center bg-dark bg-opacity-50 rounded">
@@ -34,8 +29,6 @@
                 </div>
             </div>
         </div>
-
-        {{-- Pegawai Hadir Hari Ini --}}
          <div class="col-md-6">
             <div class="card card-dashboard" style="background: url('{{ asset('img/v3.jpeg') }}') center/cover no-repeat;">
                 <div class="card-body text-center bg-dark bg-opacity-50 rounded">
@@ -45,8 +38,6 @@
                 </div>
             </div>
         </div>
-
-        {{-- Pegawai Cuti Hari Ini --}}
         <div class="col-md-6">
             <div class="card card-dashboard" style="background: url('{{ asset('img/v4.jpeg') }}') center/cover no-repeat;">
                 <div class="card-body text-center bg-dark bg-opacity-50 rounded">
@@ -65,7 +56,6 @@
     @endif
 
     <div class="row mt-5">
-        {{-- Donut Chart --}}
         <div class="col-lg-6 mb-4">
             <div class="card shadow-lg rounded-4 h-100">
                 <div class="card-body">
@@ -74,10 +64,7 @@
                 </div>
             </div>
         </div>
-
-        {{-- Aktivitas Terbaru + Tren Aktivitas --}}
         <div class="col-lg-6 mb-4 d-flex flex-column">
-            {{-- Aktivitas Terbaru --}}
             <div class="card shadow-lg rounded-4 mb-4 flex-fill">
                 <div class="card-body">
                     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -109,8 +96,6 @@
                     </ul>
                 </div>
             </div>
-
-            {{-- Tren Aktivitas --}}
             <div class="card shadow-lg rounded-4 flex-fill">
                 <div class="card-body">
                     <h5 class="fw-bold mb-3">Tren Aktivitas (7 Hari Terakhir)</h5>
@@ -119,10 +104,7 @@
             </div>
         </div>
     </div>
-
-    {{-- Row baru: Cuti Pending + Leaderboard --}}
     <div class="row mt-4 d-flex align-items-stretch">
-        {{-- CUTI PENDING --}}
         <div class="col-lg-6 mb-4 d-flex">
             <div class="card shadow-sm border-0 rounded-3 flex-fill h-100">
                 <div class="card-body">
@@ -157,8 +139,6 @@
                 </div>
             </div>
         </div>
-
-        {{-- LEADERBOARD KEHADIRAN --}}
         <div class="col-lg-6 mb-4 d-flex">
             <div class="card shadow-sm border-0 rounded-3 flex-fill h-100">
                 <div class="card-body">
@@ -178,7 +158,6 @@
         </div>
     </div>
 
-    {{-- MOTIVASI HARIAN --}}
     <div class="row mt-3">
         <div class="col-lg-12">
             <div class="alert alert-info text-center rounded-pill shadow-sm fw-semibold">
@@ -188,11 +167,8 @@
         </div>
     </div>
 
-
-    {{-- Script Chart.js --}}
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
-        // Donut Chart
         const ctx1 = document.getElementById('pegawaiChart');
         if (ctx1) {
             new Chart(ctx1, {
@@ -278,7 +254,6 @@
         });
     </script>
 
-    {{-- Custom Style --}}
     <style>
         .dashboard-card {
             border-radius: 1rem;

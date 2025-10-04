@@ -2,7 +2,6 @@
 
 @section('content')
 <div class="row">
-    {{-- Selamat Datang --}}
     <div class="col-lg-12 mb-4">
         <div class="card border-0 shadow-sm rounded-3 bg-light">
             <div class="card-body d-flex justify-content-between align-items-center">
@@ -14,8 +13,6 @@
             </div>
         </div>
     </div>
-
-    {{-- Statistik --}}
     <div class="col-md-4 mb-3">
         <div class="card text-center border-0 shadow-sm rounded-3 bg-gradient bg-primary text-white">
             <div class="card-body py-4">
@@ -45,8 +42,6 @@
             </div>
         </div>
     </div>
-
-    {{-- Distribusi Pegawai per Departemen --}}
     <div class="col-md-6 mb-3">
         <div class="card shadow-sm rounded-3 border-0">
             <div class="card-header fw-semibold bg-white border-0">
@@ -57,8 +52,6 @@
             </div>
         </div>
     </div>
-
-    {{-- Aktivitas Terbaru --}}
     <div class="col-md-6 mb-3">
         <div class="card shadow-sm rounded-3 border-0">
             <div class="card-header fw-semibold bg-white border-0">

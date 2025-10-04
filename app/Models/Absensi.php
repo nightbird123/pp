@@ -13,7 +13,7 @@ class Absensi extends Model
         'tanggal',
         'status',
         'keterangan',
-        'cuti_id', // tambahkan ini
+        'cuti_id', 
     ];
 
     public function pegawai()

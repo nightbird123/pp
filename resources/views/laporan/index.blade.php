@@ -6,8 +6,6 @@
         <div class="card">
             <div class="card-body">
                 <h4 class="fw-bold mb-3">Data Pegawai</h4>
-
-                {{-- Filter Departemen --}}
                 <form method="GET" action="{{ route('laporan.index') }}" class="mb-3 d-flex align-items-center">
                     <select name="departemen_id" class="form-select me-2" style="width: 200px;">
                         <option value="">-- Semua Departemen --</option>
@@ -21,7 +19,6 @@
                     <a href="{{ route('laporan.index') }}" class="btn btn-secondary">Reset</a>
                 </form>
 
-                {{-- Tabs untuk laporan --}}
                 <ul class="nav nav-tabs mb-3" id="laporanTab" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="pegawai-tab" data-bs-toggle="tab" data-bs-target="#pegawai" type="button" role="tab">
@@ -42,7 +39,6 @@
 
                 <div class="tab-content" id="laporanTabContent">
 
-                    {{-- Pegawai --}}
                     <div class="tab-pane fade show active" id="pegawai" role="tabpanel">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
@@ -76,7 +72,6 @@
                         </div>
                     </div>
 
-                    {{-- Absensi --}}
                     <div class="tab-pane fade" id="absensi" role="tabpanel">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
@@ -106,7 +101,6 @@
                         </div>
                     </div>
 
-                    {{-- Cuti --}}
                     <div class="tab-pane fade" id="cuti" role="tabpanel">
                         <div class="table-responsive">
                             <table class="table table-bordered table-striped">
@@ -138,7 +132,7 @@
                         </div>
                     </div>
 
-                </div> {{-- end tab-content --}}
+                </div> 
             </div>
         </div>
     </div>

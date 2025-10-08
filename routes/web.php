@@ -44,15 +44,34 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/cuti', [LaporanController::class, 'cuti'])->name('cuti');
     });
 });
-
-Route::group(['prefix' => 'hrd', 'as' => 'hrd.', 'middleware' => ['auth','role:hrd']], function() {
+Route::group(['prefix' => 'hrd', 'as' => 'hrd.', 'middleware' => ['auth']], function () {
+    // Dashboard HRD
     Route::get('/dashboard', [HrdDashboardController::class, 'index'])->name('dashboard');
+
+    // Pegawai HRD
     Route::resource('/pegawai', HrdPegawaiController::class);
+
+    // Laporan HRD
     Route::prefix('laporan')->name('laporan.')->group(function () {
         Route::get('/pegawai', [HrdLaporanController::class, 'pegawai'])->name('pegawai');
         Route::get('/absensi', [HrdLaporanController::class, 'absensi'])->name('absensi');
         Route::get('/cuti', [HrdLaporanController::class, 'cuti'])->name('cuti');
     });
+
+    // ✅ Search
+    Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+    // ✅ Profil HRD
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::put('/profile/update', [ProfileController::class, 'update'])->name('profile.update');
+
+    // ✅ Settings HRD
+    Route::get('/settings', [SettingController::class, 'index'])->name('settings');
+    Route::put('/settings/update', [SettingController::class, 'update'])->name('settings.update');
+
+    // ✅ Notifikasi HRD
+    Route::post('/notif/add', [NotifikasiController::class, 'add'])->name('notif.add');
+    Route::post('/notif/reset', [NotifikasiController::class, 'reset'])->name('notif.reset');
 });
 Route::get('/search', [SearchController::class, 'index'])->name('search');
 Route::middleware(['auth'])->group(function () {

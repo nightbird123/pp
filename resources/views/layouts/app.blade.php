@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+    <title> Admin {{ config('app.name', 'Laravel') }}</title>
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -25,44 +25,49 @@
 
     <style>
         /* Default (light mode) */
-.dropdown-user-header {
-  background-color: #f8f9fa; /* abu terang */
-  color: #212529;
-}
+        .dropdown-user-header {
+            background-color: #f8f9fa;
+            /* abu terang */
+            color: #212529;
+        }
 
-.dropdown-user-header small {
-  color: #6c757d; /* abu-abu role */
-}
+        .dropdown-user-header small {
+            color: #6c757d;
+            /* abu-abu role */
+        }
 
-/* Dark mode */
-body.dark-mode .dropdown-user-header {
-  background-color: #2b2b2b; /* abu gelap */
-  color: #f8f9fa;
-}
+        /* Dark mode */
+        body.dark-mode .dropdown-user-header {
+            background-color: #2b2b2b;
+            /* abu gelap */
+            color: #f8f9fa;
+        }
 
-body.dark-mode .dropdown-user-header small {
-  color: rgba(255, 255, 255, 0.65); /* abu terang untuk role */
-}
+        body.dark-mode .dropdown-user-header small {
+            color: rgba(255, 255, 255, 0.65);
+            /* abu terang untuk role */
+        }
 
-/* Dropdown body default (light mode) */
-.dropdown-menu {
-  background-color: #fff;
-  color: #212529;
-}
+        /* Dropdown body default (light mode) */
+        .dropdown-menu {
+            background-color: #fff;
+            color: #212529;
+        }
 
-/* Dark mode */
-body.dark-mode .dropdown-menu {
-  background-color: #1e1e1e; /* abu tua */
-  color: #f8f9fa;
-}
+        /* Dark mode */
+        body.dark-mode .dropdown-menu {
+            background-color: #1e1e1e;
+            /* abu tua */
+            color: #f8f9fa;
+        }
 
-body.dark-mode .dropdown-menu .dropdown-item {
-  color: #f8f9fa;
-}
+        body.dark-mode .dropdown-menu .dropdown-item {
+            color: #f8f9fa;
+        }
 
-body.dark-mode .dropdown-menu .dropdown-item:hover {
-  background-color: rgba(255,255,255,0.1);
-}
+        body.dark-mode .dropdown-menu .dropdown-item:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
 
         .card-dashboard {
             position: relative;
@@ -73,6 +78,7 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
             color: #fff;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
+
         .card-dashboard::before {
             content: "";
             position: absolute;
@@ -81,6 +87,7 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
             z-index: 1;
             transition: background 0.3s ease;
         }
+
         .card-dashboard .card-body {
             position: relative;
             z-index: 2;
@@ -96,6 +103,7 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
         .card-dashboard .card-body h2 {
             color: #fff;
         }
+
         .card-dashboard:hover {
             transform: scale(1.03);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
@@ -105,7 +113,7 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
             background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.4));
         }
 
-         .btn-gradient {
+        .btn-gradient {
             background: linear-gradient(45deg, #17a2b8, #0d6efd);
             color: #fff;
             border: none;
@@ -124,6 +132,7 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
         .btn-gradient:focus {
             box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, .4);
         }
+
         body.dark-mode {
             background-color: #121212 !important;
             color: #f5f5f5 !important;
@@ -243,9 +252,11 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
             color: #ffffff !important;
             border-bottom: 1px solid rgba(255, 255, 255, 0.05);
         }
+
         .content-wrapper {
             padding: 20px;
         }
+
         .dropdown-menu {
             transition: all 0.3s ease;
         }
@@ -253,6 +264,7 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
         .dropdown-menu.show {
             transform: translateY(10px);
         }
+
         .dashboard-card {
             border: none;
             border-radius: 1rem;
@@ -265,6 +277,7 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
             transform: translateY(-6px);
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
         }
+
         .card-pegawai {
             background: linear-gradient(135deg, #6366f1, #3b82f6) !important;
         }
@@ -285,6 +298,7 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
             background: #6b7280 !important;
             color: #fff;
         }
+
         body.dark-mode .layout-navbar,
         body.dark-mode .layout-navbar.navbar,
         body.dark-mode .layout-navbar.navbar.navbar-expand-xl,
@@ -311,10 +325,12 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
             color: #f5f5f5 !important;
             fill: #f5f5f5 !important;
         }
+
         body.dark-mode .apexcharts-tooltip {
             background: #1e1e1e !important;
             border: 1px solid #333 !important;
         }
+
         .search-box {
             position: relative;
             max-width: 600px;
@@ -330,6 +346,7 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
             transition: all 0.25s ease;
             font-size: 0.9rem;
         }
+
         .search-box .search-input:hover {
             background: #fff;
             border-color: #bbb;
@@ -340,6 +357,7 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
             border-color: #666;
             box-shadow: 0 0 0 2px rgba(100, 100, 100, 0.2);
         }
+
         .search-box .search-btn {
             position: absolute;
             right: 10px;
@@ -357,6 +375,7 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
         .search-box .search-btn:hover {
             color: #000;
         }
+
         body.dark-mode .search-box .search-input {
             background: #2c2c2c;
             border: 1px solid rgba(255, 255, 255, 0.2);
@@ -370,6 +389,7 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
         body.dark-mode .search-box .search-btn:hover {
             color: #fff;
         }
+
         body.dark-mode table,
         body.dark-mode .table {
             background-color: transparent !important;
@@ -392,6 +412,7 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
             color: #f1f1f1 !important;
             border-color: rgba(255, 255, 255, 0.1) !important;
         }
+
         body.dark-mode .card .card-header,
         body.dark-mode .card h5,
         body.dark-mode .card h6,
@@ -400,22 +421,26 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
         body.dark-mode .card-header h6 {
             color: #f5f5f5 !important;
         }
+
         body.dark-mode .apexcharts-title-text {
             fill: #f5f5f5 !important;
             color: #f5f5f5 !important;
         }
+
         body.light-mode {
             --bg-color: #f9f9f9;
             --box-color: #ffffff;
             --text-color: #000000;
             --text-muted: #666666;
         }
+
         body.dark-mode {
             --bg-color: #121212;
             --box-color: #1e1e2d;
             --text-color: #e5e5e5;
             --text-muted: #aaaaaa;
         }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-color);
@@ -436,7 +461,6 @@ body.dark-mode .dropdown-menu .dropdown-item:hover {
         .text-muted {
             color: var(--text-muted) !important;
         }
-        
     </style>
 
 </head>
